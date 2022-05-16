@@ -30,8 +30,8 @@ export const Login = () => {
     return (
         <div className='h-screen flex bg-gray-bg1'>
             <div className='w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16'>
-                <h1 className='text-2xl font-medium text-primary mt-4 mb-12 text-center'>
-                    Log in to your account 🔐
+                <h1 className='text-2xl font-medium text-lgreen mt-4 mb-12 text-center'>
+                    LOGIN 🔐
                 </h1>
 
                 <form onSubmit={handleFormSubmit}>
@@ -54,17 +54,15 @@ export const Login = () => {
                         />
                     </div>
 
-                    <div className='flex justify-center items-center mt-6'>
+                    <div className='flex justify-center items-center flex-col mt-6'>
                         <button
                             className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
                         >
                             Login
                         </button>
-                    </div>
 
-                    <div className="rounded-lg mx-auto w-3/4 bg-black h-1 my-3"></div>
+                        <div className="rounded-lg mx-auto w-5/6 bg-black h-1 my-5"></div>
 
-                    <div className='flex justify-center items-center mt-6'>
                         <button
                             className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
                             onClick={() => navigate("/register")}
