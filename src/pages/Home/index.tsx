@@ -1,7 +1,11 @@
 import { Cards } from "../../components/Cards";
+import { InfoComponent } from "../../components/InfoComponent";
 
 export const Home = () => {
     return (
-        <Cards />
+        <>
+            <InfoComponent />
+            <Cards />
+        </>
     );
 }
