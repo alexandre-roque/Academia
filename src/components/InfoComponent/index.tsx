@@ -10,7 +10,8 @@ export const InfoComponent = () => {
           <div className='flex flex-col justify-center text-center'>
             <h1 className='md:text-4xl text-lgreen sm:text-3xl text-2xl font-bold py-2'>Faça parte do treinamento</h1>
             <h2 className='text-xl sm:text-2xl text-white'>
-              <p>Venha fazer parte da nossa equipe de <Typed strings={['Crossfit', ' Spinning', 'Natação', 'Ritmos', 'Musculação']} typeSpeed={60} backSpeed={50} loop></Typed></p>
+              <p>Venha fazer parte da nossa equipe de </p>
+              <Typed strings={['Crossfit', ' Spinning', 'Natação', 'Ritmos', 'Musculação']} typeSpeed={60} backSpeed={50} loop></Typed>
             </h2>
           </div>
         </div>
