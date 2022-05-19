@@ -1,12 +1,12 @@
 export interface IUser {
     email?: string;
-    nome?:string,
-    perfil?:{
-        id: string,
-        vinculo: string
-    }
-    isLogged?: boolean,
-    id?: number
+    nome?: string;
+    perfil?: {
+        id: string;
+        vinculo: string;
+    };
+    isLogged?: boolean;
+    id?: number;
 }
 
 export interface IContext extends IUser {
