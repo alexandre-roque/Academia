@@ -28,7 +28,7 @@ export const Login = () => {
     }
 
     return (
-        <div className="h-5/6 my-[125px] flex bg-gray-bg1">
+        <div className="h-5/6 my-9 flex bg-gray-bg1">
             <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
                 <h1 className="text-2xl font-medium text-lgreen mt-4 mb-12 text-center">
                     LOGIN 🔐
