@@ -1,17 +1,4 @@
-export interface PriceTabel {
-    amount: string,
-    price: string
-}
-
-export interface CardProps{
-    label: string,
-    prices: PriceTabel[]
-}
-
-export interface plano{
-    name: string,
-    options: CardProps[]
-}
+import { plano } from "./components/Cards";
 
 export const planos: plano[] = [
     {

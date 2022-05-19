@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardProps, PriceTabel } from '../../../test';
+import { CardProps, PriceTabel } from '..';
 
 export const Card = ({ label, prices }: CardProps) => {
     const navigate = useNavigate();

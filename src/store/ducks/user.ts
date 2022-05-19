@@ -4,7 +4,7 @@ import { IUser } from "../../context/AuthProvider/types";
 const initialState: IUser = {
     email: '',
     nome: '',
-    endereco: undefined,
+    perfil: undefined,
     isLogged: false,
     id: -1
 };

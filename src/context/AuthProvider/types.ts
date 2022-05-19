@@ -1,15 +1,10 @@
 export interface IUser {
     email?: string;
     nome?:string,
-    endereco?: {
-        cep?:string,
-        complemento?:string,
-        numero?:number,
-        bairro?:string,
-        cidade?:string,
-        estado?:string,
-        rua?: string
-    },
+    perfil?:{
+        id: string,
+        vinculo: string
+    }
     isLogged?: boolean,
     id?: number
 }
