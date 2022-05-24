@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
+import MyModal from "../../components/MyDialog";
 import { useAuth } from "../../context/AuthProvider/useAuth";
+import { selectUser } from "../../store/ducks/user";
 
 export const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
+    const [isOpen, setOpen] = useState(false);
+    const user = useSelector(selectUser);
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
@@ -17,13 +21,16 @@ export const Login = () => {
     };
 
     async function onFinish(values: { email: string; senha: string }) {
-        console.log(values);
         try {
-            await auth.authenticate(values.email, values.senha);
+            const response = await auth.authenticate(values.email, values.senha);
+
+            if(!user.isLogged){
+                setOpen(true);
+            }
 
             navigate("/");
         } catch (error) {
-            // message.error("Email ou senha inválidos");
+            setOpen(true);
         }
     }
 
@@ -53,6 +60,8 @@ export const Login = () => {
                             placeholder="Your Password"
                         />
                     </div>
+
+                    <MyModal title="Erro" content="Erro ao fazer login" open={isOpen}/>
 
                     <div className="flex justify-center items-center flex-col mt-6">
                         <button

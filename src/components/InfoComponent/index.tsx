@@ -7,7 +7,7 @@ export const InfoComponent = () => {
         <div className="w-full bg-lblack py-16 px-4">
             <div className="max-w-[1240px] mx-auto grid md:grid-cols-2">
                 <img
-                    className="w-[500px] mx-auto my-4"
+                    className="w-[500px] mx-auto my-4 rounded-lg"
                     src={Academia}
                     alt="/"
                 />
