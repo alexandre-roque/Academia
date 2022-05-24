@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import MyModal from "../../components/MyDialog";
 import { useAuth } from "../../context/AuthProvider/useAuth";
-import { selectUser } from "../../store/ducks/user";
+import { openModal } from "../../store/ducks/modal";
 
 export const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
-    const [isOpen, setOpen] = useState(false);
-    const user = useSelector(selectUser);
+    const dispatch = useDispatch();
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
@@ -17,21 +16,19 @@ export const Login = () => {
         let email = e.target.elements.email?.value;
         let password = e.target.elements.password?.value;
 
-        onFinish({ email: email, senha: password });
+        onFinish({ email: email, senha: password }).then(() => {
+            if (auth.isLogged) {
+                navigate("/");
+            } else {
+                dispatch(openModal());
+            }
+        });
     };
 
     async function onFinish(values: { email: string; senha: string }) {
         try {
-            const response = await auth.authenticate(values.email, values.senha);
-
-            if(!user.isLogged){
-                setOpen(true);
-            }
-
-            navigate("/");
-        } catch (error) {
-            setOpen(true);
-        }
+            await auth.authenticate(values.email, values.senha);
+        } catch (error) {}
     }
 
     return (
@@ -61,7 +58,7 @@ export const Login = () => {
                         />
                     </div>
 
-                    <MyModal title="Erro" content="Erro ao fazer login" open={isOpen}/>
+                    <MyModal title="Erro" content="Erro ao efetuar o login" />
 
                     <div className="flex justify-center items-center flex-col mt-6">
                         <button

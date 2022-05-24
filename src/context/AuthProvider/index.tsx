@@ -22,8 +22,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     async function authenticate(email: string, senha: string) {
         const response = await LoginRequest(email, senha);
 
-        console.log(response);
-
         if (!response || !response.isLogged) {
             throw "Não foi possível fazer login";
         }
