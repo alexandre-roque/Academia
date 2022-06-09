@@ -40,6 +40,9 @@ const Navbar = () => {
                 <li className="p-4">
                     <Link to={"/contatos"}>Contatos</Link>
                 </li>
+                <li className="p-4">
+                    <Link to={"/profile"}>Profile</Link>
+                </li>
             </ul>
             <div onClick={handleNav} className="block md:hidden">
                 {nav ? (
@@ -67,8 +70,11 @@ const Navbar = () => {
                 <li className="p-4 border-b border-gray-600">
                     <Link to={"/sobre"}>Sobre</Link>
                 </li>
-                <li className="p-4">
+                <li className="p-4 border-b border-gray-600">
                     <Link to={"/contatos"}>Contatos</Link>
+                </li>
+                <li className="p-4">
+                    <Link to={"/profile"}>Profile</Link>
                 </li>
             </ul>
         </div>

@@ -6,12 +6,15 @@ export const Card = ({ label, prices }: CardProps) => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full shadow-xl flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300">
+        <div className="w-full shadow-slate-300 shadow-2xl flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300">
             <h2 className="text-2xl font-bold text-center py-8">{label}</h2>
             <div className="text-center font-medium">
                 {prices!.map((price: PriceTabel) => {
                     return (
-                        <p className="py-2 border-b mx-8 mt-8">
+                        <p
+                            key={price.amount + price.price}
+                            className="py-2 border-b mx-8 mt-8"
+                        >
                             {price.amount} - {price.price}
                         </p>
                     );

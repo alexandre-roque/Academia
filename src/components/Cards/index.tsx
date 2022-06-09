@@ -22,7 +22,10 @@ export const Cards = () => {
         <>
             {(planos as plano[]).map((plano) => {
                 return (
-                    <div className="w-full py-[4rem] px-4 bg-white">
+                    <div
+                        key={plano.name}
+                        className="w-full py-[4rem] px-4 bg-white"
+                    >
                         <div className="py-5 text-center text-4xl font-black uppercase">
                             {plano.name}
                         </div>
@@ -30,6 +33,7 @@ export const Cards = () => {
                             {plano.options.map((option) => {
                                 return (
                                     <Card
+                                        key={option.label}
                                         label={option.label}
                                         prices={option.prices}
                                     />
