@@ -5,6 +5,7 @@ import { Home } from "../pages/Home";
 import { Error } from "../pages/Error";
 import Navbar from "../components/Navbar";
 import { Profile } from "../pages/Profile";
+import { Cadastro } from "../pages/Cadastro";
 
 export const AppRoutes = () => {
     return (
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </Router>
