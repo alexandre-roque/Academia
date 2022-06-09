@@ -1,4 +1,4 @@
-import { plano } from "./components/Cards";
+import { plano } from "../components/Cards";
 
 export const planos: plano[] = [
     {

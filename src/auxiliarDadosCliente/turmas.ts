@@ -1,4 +1,4 @@
-import { WorkoutClass } from "./components/Turmas";
+import { WorkoutClass } from "../components/Turmas";
 
 export const turmas: WorkoutClass[] = [
     {

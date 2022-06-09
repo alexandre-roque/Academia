@@ -1,6 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import { treinos } from "../../treino";
+import { treinos } from "../../auxiliarDadosCliente/treino";
 
 export interface Exercises {
     id: number;

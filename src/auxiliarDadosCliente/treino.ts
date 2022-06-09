@@ -1,4 +1,4 @@
-import { Workout } from "./components/Treinos";
+import { Workout } from "../components/Treinos";
 
 export const treinos: Workout[] = [
     {

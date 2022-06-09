@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "./Card";
-import { planos } from "../../planos";
+import { planos } from "../../auxiliarDadosCliente/planos";
 
 export interface PriceTabel {
     amount: string;

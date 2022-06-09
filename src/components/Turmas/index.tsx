@@ -1,6 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import { turmas } from "../../turmas";
+import { turmas } from "../../auxiliarDadosCliente/turmas";
 
 export interface Schedule {
     id: number;

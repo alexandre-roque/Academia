@@ -6,6 +6,7 @@ import { Error } from "../pages/Error";
 import Navbar from "../components/Navbar";
 import { Profile } from "../pages/Profile";
 import { Cadastro } from "../pages/Cadastro";
+import { CalendarPage } from "../pages/Calendar";
 
 export const AppRoutes = () => {
     return (
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </Router>
