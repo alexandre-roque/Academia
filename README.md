@@ -1,13 +1,14 @@
-# Introdução ao Tailwindcss
+# Segundo trabalho da disciplina Engenharia de Software
 
-TailwindCSS na prática!
+## Objetivo: 
+O trabalho consiste em fazer uma aplicação para uma academia.
 
-Com os desafios de entregar código mais rápido, com performance, que seja customizável, vemos o surgimento de várias bibliotecas tentando resolver esse problema. 
 
-O TailwindCSS é uma alternativa interessante, que merece nossa atenção!
+## Instalação:
+Você precisa ter o node instalado, baixe e instale de acordo com as instruções: https://nodejs.org/en/download/
 
-Com a possibilidade de classes fáceis e intuitivas, com media queries facilitados, seu uso garante alta produtividade para nós devs.
+Após isso, instale o yarn: https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable
 
-Vamos explorar isso juntos?
+Abra a pasta do projeto e execute o código para instalar as dependências: `yarn`
 
-[Vídeo Aula Disponível](https://www.youtube.com/watch?v=eBYSFjgO6Hk)
+Depois disso, execute o código: `yarn dev`
