@@ -43,18 +43,18 @@ export const Login = () => {
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
-                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
                             id="email"
-                            placeholder="Your Email"
+                            placeholder="Seu email"
                         />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
-                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
                             id="password"
-                            placeholder="Your Password"
+                            placeholder="Sua senha"
                         />
                     </div>
 

@@ -83,7 +83,7 @@ export const Cadastro = () => {
         <div className="h-5/6 my-9 flex">
             <div className="w-full max-w-md m-auto bg-slate-300 rounded-lg shadow-lg py-10 px-16">
                 <h1 className="text-2xl font-medium text-black mt-4 mb-4 text-center">
-                    CADASTRO DE CLIENTE
+                    CADASTRO DO CLIENTE
                 </h1>
 
                 <form onSubmit={handleFormSubmit}>
@@ -91,9 +91,9 @@ export const Cadastro = () => {
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
-                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
                             id="email"
-                            placeholder="Your Email"
+                            placeholder="Email do cliente"
                         />
                     </div>
 
@@ -101,9 +101,9 @@ export const Cadastro = () => {
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
-                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
                             id="password"
-                            placeholder="Your Password"
+                            placeholder="Senha do cliente"
                         />
                     </div>
 
@@ -111,16 +111,16 @@ export const Cadastro = () => {
                         <label htmlFor="cpf">Cpf</label>
                         <input
                             type="text"
-                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
                             id="cpf"
-                            placeholder="Your Cpf"
+                            placeholder="Cpf do cliente"
                         />
                     </div>
 
                     <div className="relative w-full flex flex-col">
                         <label>Card number</label>
                         <input
-                            className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4"
+                            className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack"
                             type="text"
                             id="card_number"
                             placeholder="0000 0000 0000"
@@ -145,7 +145,7 @@ export const Cadastro = () => {
                         <div className="relative flex-1 flex flex-col">
                             <label>Expire date</label>
                             <input
-                                className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4"
+                                className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack"
                                 type="text"
                                 id="expire_date"
                                 placeholder="MM/YY"
@@ -192,7 +192,7 @@ export const Cadastro = () => {
                                 </span>
                             </label>
                             <input
-                                className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4"
+                                className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack"
                                 type="text"
                                 id="card_cvc"
                                 placeholder="&bull;&bull;&bull;"
@@ -221,7 +221,7 @@ export const Cadastro = () => {
                             onChange={setSelectedModalidade}
                         >
                             <div className="relative mt-1">
-                                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                <Listbox.Button className="focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack  relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left sm:text-sm">
                                     <span className="block truncate">
                                         {selectedModalidade.name}
                                     </span>
@@ -294,7 +294,7 @@ export const Cadastro = () => {
                                     multiple
                                 >
                                     <div className="relative mt-1">
-                                        <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                        <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack sm:text-sm">
                                             <span className="block truncate">
                                                 {selectedDias
                                                     .map((dias) => dias.name)
@@ -365,7 +365,7 @@ export const Cadastro = () => {
                                     multiple
                                 >
                                     <div className="relative mt-1">
-                                        <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                        <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack  sm:text-sm">
                                             <span className="block truncate">
                                                 {selectedHorario
                                                     .map((dias) => dias)
