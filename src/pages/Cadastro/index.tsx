@@ -36,6 +36,13 @@ const modalidades = [
 
 export const Cadastro = () => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [card_number, setCardNumber] = useState("");
+    const [expire_date, setExpireDate] = useState("");
+    const [card_cvc, setCardCvc] = useState("");
+
     const [selectedModalidade, setSelectedModalidade] = useState(
         modalidades[0]
     );
@@ -72,10 +79,15 @@ export const Cadastro = () => {
         e.preventDefault();
 
         console.log({
+            email: email,
+            password: password,
+            cpf: cpf,
+            card_number: card_number,
+            expire_date: expire_date,
+            card_cvc: card_cvc,
             selectedModalidade: selectedModalidade,
-            selectedDias: selectedDias,
-            selectedHorario: selectedHorario,
-            e: e.target[1],
+            selectedDias: selectedDias.map((dia) => dia.name).join(", "),
+            selectedHorario: selectedHorario.join(", "),
         });
     };
 
@@ -94,6 +106,7 @@ export const Cadastro = () => {
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
                             id="email"
                             placeholder="Email do cliente"
+                            onChange={(event) => setEmail(event.target.value)}
                         />
                     </div>
 
@@ -104,6 +117,9 @@ export const Cadastro = () => {
                             className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
                             id="password"
                             placeholder="Senha do cliente"
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
                         />
                     </div>
 
@@ -114,6 +130,7 @@ export const Cadastro = () => {
                             className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
                             id="cpf"
                             placeholder="Cpf do cliente"
+                            onChange={(event) => setCpf(event.target.value)}
                         />
                     </div>
 
@@ -124,6 +141,9 @@ export const Cadastro = () => {
                             type="text"
                             id="card_number"
                             placeholder="0000 0000 0000"
+                            onChange={(event) =>
+                                setCardNumber(event.target.value)
+                            }
                         />
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -149,6 +169,9 @@ export const Cadastro = () => {
                                 type="text"
                                 id="expire_date"
                                 placeholder="MM/YY"
+                                onChange={(event) =>
+                                    setExpireDate(event.target.value)
+                                }
                             />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +219,9 @@ export const Cadastro = () => {
                                 type="text"
                                 id="card_cvc"
                                 placeholder="&bull;&bull;&bull;"
+                                onChange={(event) =>
+                                    setCardCvc(event.target.value)
+                                }
                             />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

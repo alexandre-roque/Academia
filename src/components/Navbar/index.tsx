@@ -46,6 +46,9 @@ const Navbar = () => {
                 <li className="p-4">
                     <Link to={"/cadastro"}>Cadastro</Link>
                 </li>
+                <li className="p-4">
+                    <Link to={"/registro-treino"}>RegTreino</Link>
+                </li>
             </ul>
             <div onClick={handleNav} className="block md:hidden">
                 {nav ? (
@@ -79,8 +82,11 @@ const Navbar = () => {
                 <li className="p-4 border-gray-600">
                     <Link to={"/profile"}>Profile</Link>
                 </li>
-                <li className="p-4">
+                <li className="p-4 border-gray-600">
                     <Link to={"/cadastro"}>Cadastro</Link>
+                </li>
+                <li className="p-4">
+                    <Link to={"/registro-treino"}>RegTreino</Link>
                 </li>
             </ul>
         </div>

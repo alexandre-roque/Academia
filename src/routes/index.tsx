@@ -8,6 +8,7 @@ import { Profile } from "../pages/Profile";
 import { Cadastro } from "../pages/Cadastro";
 import { CalendarPage } from "../pages/Calendar";
 import { Avaliacao } from "../pages/Avaliacao";
+import { RegistroTreino } from "../pages/RegistroTreino";
 
 export const AppRoutes = () => {
     return (
@@ -21,6 +22,7 @@ export const AppRoutes = () => {
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/avaliacao" element={<Avaliacao />} />
+                <Route path="/registro-treino" element={<RegistroTreino />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </Router>

@@ -1,10 +1,18 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Avaliacao = () => {
     const navigate = useNavigate();
+    const [emailCliente, setEmailCliente] = useState("");
+    const [imcCliente, setImcCliente] = useState("");
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
+
+        console.log({
+            email: emailCliente,
+            imc: Number(imcCliente),
+        });
     };
 
     return (
@@ -15,25 +23,29 @@ export const Avaliacao = () => {
                 </h1>
 
                 <form onSubmit={handleFormSubmit}>
-                    <div>
-                        <label htmlFor="user">Usuário</label>
-                        <input
-                            type="email"
-                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
-                            id="email"
-                            placeholder="Email do cliente"
-                        />
-                    </div>
+                    <label htmlFor="user">Usuário</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={emailCliente}
+                        onChange={(event) =>
+                            setEmailCliente(event.target.value)
+                        }
+                        className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
+                        id="email"
+                        placeholder="Email do cliente"
+                    />
 
-                    <div>
-                        <label htmlFor="IMC">IMC</label>
-                        <input
-                            type="text"
-                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
-                            id="password"
-                            placeholder="IMC do usuário"
-                        />
-                    </div>
+                    <label htmlFor="IMC">IMC</label>
+                    <input
+                        type="text"
+                        name="imc"
+                        value={imcCliente}
+                        onChange={(event) => setImcCliente(event.target.value)}
+                        className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
+                        id="imc"
+                        placeholder="IMC do usuário"
+                    />
 
                     <div className="flex justify-center items-center flex-col mt-3">
                         <button
