@@ -1,26 +1,24 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { closeModal } from "../../store/ducks/modal";
 
 export default function MyModal({
+    isOpen,
+    toggle,
     title,
     content,
 }: {
+    isOpen: boolean;
+    toggle: Function;
     title: string;
     content: string;
 }) {
-    const dispatch = useDispatch();
-    const isOpen = useSelector((state: RootState) => state.modal.isOpen);
-
     return (
         <>
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog
                     as="div"
                     className="relative z-10"
-                    onClose={() => dispatch(closeModal())}
+                    onClose={() => toggle()}
                 >
                     <Transition.Child
                         as={Fragment}
@@ -62,9 +60,7 @@ export default function MyModal({
                                         <button
                                             type="button"
                                             className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                                            onClick={() =>
-                                                dispatch(closeModal())
-                                            }
+                                            onClick={() => toggle()}
                                         >
                                             Entendi, tudo bem!
                                         </button>

@@ -1,21 +1,29 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { changeUser, reduxLogout } from "../../store/ducks/user";
+import { avaliacoes } from "../../auxiliarDadosCliente/avaliacoes";
+import { treinos } from "../../auxiliarDadosCliente/treino";
+import { turmas } from "../../auxiliarDadosCliente/turmas";
 import { IAuthProvider, IContext, IUser } from "./types";
 import { getUserLocalStorage, LoginRequest, setUserLocalStorage } from "./util";
 
 export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
-    const [user, setUser] = useState<IUser | null>();
-    const dispatch = useDispatch();
+    const [user, setUser] = useState<IUser | null>({
+        email: "alexandreroque1@hotmail.com",
+        nome: "Alexandre Roque",
+        vinculo: "Admin",
+        turmas: turmas,
+        treinos: treinos,
+        avaliacoes: avaliacoes,
+        isLogged: true,
+        id: 131313,
+    });
 
     useEffect(() => {
         const user = getUserLocalStorage();
 
         if (user) {
             setUser(user);
-            dispatch(changeUser(user));
         }
     }, []);
 
@@ -31,16 +39,18 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
             nome: response.nome,
             endereco: response.endereco,
             isLogged: response.isLogged,
+            vinculo: response.vinculo,
+            turmas: response.turmas,
+            treinos: response.treinos,
+            avaliacao: response.avaliacao,
             id: response.id,
         };
 
         setUser(payload);
         setUserLocalStorage(payload);
-        dispatch(changeUser(payload));
     }
 
     function logout() {
-        dispatch(reduxLogout());
         setUser(null);
         setUserLocalStorage(null);
     }

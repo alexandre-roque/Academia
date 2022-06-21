@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import MyModal from "../../components/MyDialog";
 import { useAuth } from "../../context/AuthProvider/useAuth";
-import { openModal } from "../../store/ducks/modal";
 
 export const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        setModalOpen((prevState) => !prevState);
+    };
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
@@ -20,7 +23,7 @@ export const Login = () => {
             if (auth.isLogged) {
                 navigate("/");
             } else {
-                dispatch(openModal());
+                toggleModal();
             }
         });
     };
@@ -58,7 +61,12 @@ export const Login = () => {
                         />
                     </div>
 
-                    <MyModal title="Erro" content="Erro ao efetuar o login" />
+                    <MyModal
+                        isOpen={modalOpen}
+                        toggle={toggleModal}
+                        title="Erro"
+                        content="Erro ao efetuar o login"
+                    />
 
                     <div className="flex justify-center items-center flex-col mt-6">
                         <button

@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../pages/Login";
-import { Register } from "../pages/Register";
 import { Home } from "../pages/Home";
 import { Error } from "../pages/Error";
 import Navbar from "../components/Navbar";
@@ -9,6 +8,8 @@ import { Cadastro } from "../pages/Cadastro";
 import { CalendarPage } from "../pages/Calendar";
 import { Avaliacao } from "../pages/Avaliacao";
 import { RegistroTreino } from "../pages/RegistroTreino";
+import { Sobre } from "../pages/Sobre";
+import { Contatos } from "../pages/Contatos";
 
 export const AppRoutes = () => {
     return (
@@ -17,11 +18,12 @@ export const AppRoutes = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/avaliacao" element={<Avaliacao />} />
+                <Route path="/contatos" element={<Contatos />} />
+                <Route path="/sobre" element={<Sobre />} />
                 <Route path="/registro-treino" element={<RegistroTreino />} />
                 <Route path="*" element={<Error />} />
             </Routes>

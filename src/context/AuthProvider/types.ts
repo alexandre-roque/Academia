@@ -5,10 +5,10 @@ import { WorkoutClass } from "../../components/Turmas";
 export interface IUser {
     email?: string;
     nome?: string;
-    vinculo: string;
-    turmas: WorkoutClass[];
-    treinos: Workout[];
-    avaliacao: Avaliacao[];
+    vinculo?: string;
+    turmas?: WorkoutClass[];
+    treinos?: Workout[];
+    avaliacoes?: Avaliacao[];
     isLogged?: boolean;
     id?: number;
 }
