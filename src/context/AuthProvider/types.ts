@@ -1,14 +1,17 @@
+import { Avaliacao } from "../../components/AvaliacaoMedica";
+import { Workout } from "../../components/Treinos";
+import { WorkoutClass } from "../../components/Turmas";
+
 export interface IUser {
     email?: string;
     nome?: string;
-    perfil?: {
-        id: string;
-        vinculo: string;
-    };
+    vinculo: string;
+    turmas: WorkoutClass[];
+    treinos: Workout[];
+    avaliacao: Avaliacao[];
     isLogged?: boolean;
     id?: number;
 }
-
 export interface IContext extends IUser {
     authenticate: (email: string, senha: string) => Promise<void>;
     logout: () => void;

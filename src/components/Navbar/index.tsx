@@ -29,9 +29,6 @@ const Navbar = () => {
             </h1>
             <ul className="hidden md:flex">
                 <li className="p-4">
-                    <Link to={"/"}>Home</Link>
-                </li>
-                <li className="p-4">
                     <Link to={"/sobre"}>Sobre</Link>
                 </li>
                 <li className="p-4">
@@ -46,8 +43,8 @@ const Navbar = () => {
                 <li className="p-4">
                     <Link to={"/cadastro"}>Cadastro</Link>
                 </li>
-                <li className="p-4">
-                    <Link to={"/registro-treino"}>RegTreino</Link>
+                <li className="p-4 text-center">
+                    <Link to={"/registro-treino"}>Registro Treino</Link>
                 </li>
             </ul>
             <div onClick={handleNav} className="block md:hidden">
@@ -68,9 +65,6 @@ const Navbar = () => {
                     BE FIT.
                 </h1>
                 <li className="p-4 border-b border-gray-600">
-                    <Link to={"/"}>Home</Link>
-                </li>
-                <li className="p-4 border-b border-gray-600">
                     <Link to={"/login"}>Login</Link>
                 </li>
                 <li className="p-4 border-b border-gray-600">
@@ -85,8 +79,8 @@ const Navbar = () => {
                 <li className="p-4 border-gray-600">
                     <Link to={"/cadastro"}>Cadastro</Link>
                 </li>
-                <li className="p-4">
-                    <Link to={"/registro-treino"}>RegTreino</Link>
+                <li className="p-4 text-center">
+                    <Link to={"/registro-treino"}>Registro Treino</Link>
                 </li>
             </ul>
         </div>

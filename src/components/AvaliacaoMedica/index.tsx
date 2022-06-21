@@ -1,17 +1,10 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-
-export interface avaliacao {
+import { avaliacoes } from "../../auxiliarDadosCliente/avaliacoes";
+export interface Avaliacao {
     data: String;
     IMC: number;
 }
-
-const avaliacoes: avaliacao[] = [
-    {
-        data: "21/05/2022",
-        IMC: 14.9,
-    },
-];
 
 export default function AvaliacaoMedica() {
     return (
