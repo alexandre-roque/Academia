@@ -1,12 +1,24 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import { avaliacoes } from "../../auxiliarDadosCliente/avaliacoes";
+import { gql, useQuery } from "@apollo/client";
+
 export interface Avaliacao {
-    data: String;
+    data: string;
     IMC: number;
 }
 
+const GET_AVALIACOES_QUERY = gql`
+    query {
+        avaliacoes {
+            
+        }
+    }
+`;
+
 export default function AvaliacaoMedica() {
+    // const { data } = useQuery<{avaliacoes: Avaliacao[]}>(GET_AVALIACOES_QUERY);
+
     return (
         <div className="w-full px-4 mb-8">
             <div className="mx-auto w-full rounded-2xl bg-white p-2">

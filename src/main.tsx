@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "./index.tsx";
 import App from ".";
-import { QueryClientProvider } from "react-query";
-import { queryClient } from "./services/queryClient";
+import { client } from "./lib/apollo";
+import { ApolloProvider } from "@apollo/client";
 
 ReactDOM.render(
     <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
+        <ApolloProvider client={client}>
             <App />
-        </QueryClientProvider>
+        </ApolloProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );
