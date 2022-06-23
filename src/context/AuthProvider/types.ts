@@ -9,7 +9,7 @@ export interface IUser {
     id?: string;
 }
 export interface IContext extends IUser {
-    authenticate: (email: string, senha: string) => Promise<void>;
+    authenticate: (user: IUser) => void;
     logout: () => void;
 }
 

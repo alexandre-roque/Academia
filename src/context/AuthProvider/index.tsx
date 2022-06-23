@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         email: "alexandre@teste.com",
         nome: "Alexandre Teste",
         vinculo: "Admin",
-        id: 'cl4qyim712tdq0dkd6zoi7hr9',
+        id: "cl4qyim712tdq0dkd6zoi7hr9",
     });
 
     // useEffect(() => {
@@ -21,19 +21,12 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     //     }
     // }, []);
 
-    async function authenticate(email: string, senha: string) {
-
-        const { data } = await LoginRequest(email, senha);
-        
-        if (!data || !data.email) {
-            throw "Não foi possível fazer login";
-        }
-
+    function authenticate(user: IUser) {
         const payload = {
-            email,
-            nome: data.nome,
-            vinculo: data.vinculo,
-            id: data.id,
+            email: user.email,
+            nome: user.nome,
+            vinculo: user.vinculo,
+            id: user.id,
         };
 
         setUser(payload);

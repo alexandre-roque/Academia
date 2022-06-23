@@ -1,26 +1,48 @@
-import { useEffect, useState } from "react";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyModal from "../../components/MyDialog";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 
+const GET_USER_QUERY = gql`
+    query ($userEmail: String, $userPassword: String) {
+        usuario(where: { email: $userEmail, senha: $userPassword }) {
+            email
+            nome
+            vinculo
+        }
+    }
+`;
+
 export const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const [modalOpen, setModalOpen] = useState(false);
+
+    const [loginFunction, { data: userSearchedData, error: userError }] =
+        useLazyQuery(GET_USER_QUERY, {
+            variables: {
+                userEmail: email,
+                userPassword: password,
+            },
+        });
+
+    useEffect(() => {
+        if (userSearchedData && userSearchedData.usuario) {
+            auth.authenticate(userSearchedData.usuario);
+            navigate("/");
+        }
+    }, [userSearchedData, userError]);
 
     const toggleModal = () => {
         setModalOpen((prevState) => !prevState);
     };
 
-    const handleFormSubmit = async (e: any) => {
+    const handleFormSubmit = async (e: FormEvent) => {
         e.preventDefault();
-
-        try {
-            await auth.authenticate(email, password);
-        } catch (error) {}
     };
 
     return (
@@ -48,7 +70,9 @@ export const Login = () => {
                             type="text"
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
                             placeholder="Sua senha"
-                            onChange={(event) => setPassword(event.target.value)}
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
                             value={password}
                         />
                     </div>
@@ -62,6 +86,7 @@ export const Login = () => {
 
                     <div className="flex justify-center items-center flex-col mt-6">
                         <button
+                            onClick={() => loginFunction()}
                             className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
                         >
                             Login

@@ -1,9 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import { IUser } from "./types";
 
 const GET_USER_QUERY = gql`
     query ($userEmail: String, $userPassword: String) {
-        usuarios(where: {email: $userEmail, senha: $userPassword}) {
+        usuarios(where: { email: $userEmail, senha: $userPassword }) {
             email
             nome
             vinculo
@@ -28,12 +28,15 @@ const GET_USER_QUERY = gql`
 // }
 
 export async function LoginRequest(email: string, senha: string) {
-    const { data } = useQuery(GET_USER_QUERY, {
-        variables: {
-            "userEmail": email,
-            "userPassword": senha
-        }
-    });
+    const [loginFunction, { data: userSearchedData, error: userError }] =
+        useLazyQuery(GET_USER_QUERY, {
+            variables: {
+                userEmail: email,
+                userPassword: senha,
+            },
+        });
 
-    return data;
+    console.log(userSearchedData);
+
+    return userSearchedData;
 }
