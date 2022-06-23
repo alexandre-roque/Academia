@@ -7,21 +7,12 @@ import { useAuth } from "../../context/AuthProvider/useAuth";
 export interface Avaliacao {
     data: string;
     IMC: number;
+    id: string;
 }
 
-export default function AvaliacaoMedica() {
-    const user = useAuth();
-
-    const GET_AVALIACOES_QUERY = gql`
-    query {
-        avaliacoes(where: {usuario: {id: ${user.id} }}) {
-            imc
-            data
-        }
-    }  
-    `;
-
+export default function AvaliacaoMedica({GET_AVALIACOES_QUERY}: {GET_AVALIACOES_QUERY: any}) {
     const { data } = useQuery<{avaliacoes: Avaliacao[]}>(GET_AVALIACOES_QUERY);
+
     return (
         <div className="w-full px-4 mb-8">
             <div className="mx-auto w-full rounded-2xl bg-white p-2">
@@ -46,7 +37,7 @@ export default function AvaliacaoMedica() {
                             </Disclosure.Button>
                             {data?.avaliacoes.map((avaliacao) => {
                                 return (
-                                    <Disclosure.Panel className="rounded-lg my-2 px-4 pt-4 pb-2 text-gray-800 bg-slate-200">
+                                    <Disclosure.Panel key={avaliacao.id} className="rounded-lg my-2 px-4 pt-4 pb-2 text-gray-800 bg-slate-200">
                                         <span className="font-bold text-2xl">
                                             {avaliacao.data}
                                             <br />

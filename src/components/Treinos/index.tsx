@@ -4,17 +4,17 @@ import { treinos } from "../../auxiliarDadosCliente/treino";
 
 export interface Exercises {
     id: number;
-    name: String;
+    nome: String;
     reps: String;
 }
 
 export interface Workout {
     id: number;
-    name: String;
-    exercises: Exercises[];
+    nome: String;
+    exercicios: Exercises[];
 }
 
-export default function Treinos() {
+export default function Treinos(GET_TREINOS_QUERY:{GET_TREINOS_QUERY:any}) {
     return (
         <div className="w-full px-4 mb-8">
             <div className="mx-auto w-full rounded-2xl bg-white p-2">
@@ -45,18 +45,18 @@ export default function Treinos() {
                                         className="rounded-lg my-2 px-4 pt-4 pb-2 text-gray-800 bg-slate-200"
                                     >
                                         <span className="font-bold text-2xl">
-                                            Treino {treino.name}
+                                            Treino {treino.nome}
                                             <br />
                                         </span>
 
-                                        {treino.exercises.map((exercise) => {
+                                        {treino.exercicios.map((exercise) => {
                                             return (
                                                 <div
                                                     className="grid grid-cols-3 mt-1"
                                                     key={exercise.id}
                                                 >
                                                     <div className="col-span-2 font-medium text-lg">
-                                                        {exercise.name}
+                                                        {exercise.nome}
                                                     </div>
                                                     <div className="col-span-1 font-normal text-md">
                                                         {exercise.reps}

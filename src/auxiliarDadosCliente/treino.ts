@@ -2,124 +2,124 @@ import { Workout } from "../components/Treinos";
 
 export const treinos: Workout[] = [
     {
-        name: "A",
+        nome: "A",
         id: 1,
-        exercises: [
+        exercicios: [
             {
                 id: 1,
-                name: "Agachamento",
+                nome: "Agachamento",
                 reps: "5 X 8-10 reps",
             },
             {
                 id: 2,
-                name: "Leg Press",
+                nome: "Leg Press",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 3,
-                name: "Extensora ",
+                nome: "Extensora ",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 4,
-                name: "Stiff ",
+                nome: "Stiff ",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 5,
-                name: "Mesa flexora",
+                nome: "Mesa flexora",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 6,
-                name: "Extensora lombar",
+                nome: "Extensora lombar",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 7,
-                name: "Panturrilha ",
+                nome: "Panturrilha ",
                 reps: "4 X 8-10 reps",
             },
         ],
     },
     {
         id: 2,
-        name: "B",
-        exercises: [
+        nome: "B",
+        exercicios: [
             {
                 id: 1,
-                name: "Supino ",
+                nome: "Supino ",
                 reps: "5 X 8-10 reps",
             },
             {
                 id: 2,
-                name: "Supino inclinado halteres",
+                nome: "Supino inclinado halteres",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 3,
-                name: "Peck deck fly ",
+                nome: "Peck deck fly ",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 4,
-                name: "Desenvolvimento  ",
+                nome: "Desenvolvimento  ",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 5,
-                name: "Elevação lateral",
+                nome: "Elevação lateral",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 6,
-                name: "Mergulho",
+                nome: "Mergulho",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 7,
-                name: "Tríceps corda ",
+                nome: "Tríceps corda ",
                 reps: "3 X 8-10 reps",
             },
         ],
     },
     {
         id: 3,
-        name: "C",
-        exercises: [
+        nome: "C",
+        exercicios: [
             {
                 id: 1,
-                name: "Barra fixa",
+                nome: "Barra fixa",
                 reps: "5 X 8-10 reps",
             },
             {
                 id: 2,
-                name: "Remada baixa",
+                nome: "Remada baixa",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 3,
-                name: "Puxada alta ",
+                nome: "Puxada alta ",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 4,
-                name: "Rosca alternada ",
+                nome: "Rosca alternada ",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 5,
-                name: "Rosca direta",
+                nome: "Rosca direta",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 6,
-                name: "Abdominal crunch",
+                nome: "Abdominal crunch",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 7,
-                name: "Abdominal oblíquo ",
+                nome: "Abdominal oblíquo ",
                 reps: "3 X 8-10 reps",
             },
         ],

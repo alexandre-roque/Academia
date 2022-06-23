@@ -3,43 +3,43 @@ import { WorkoutClass } from "../components/Turmas";
 export const turmas: WorkoutClass[] = [
     {
         id: 1,
-        name: "Natação",
-        schedules: [
+        nome: "Natação",
+        horarios: [
             {
                 id: 1,
-                day: "Segunda",
-                time: "08:00",
+                dia: "Segunda",
+                horario: "08:00",
             },
             {
                 id: 2,
-                day: "Quarta",
-                time: "19:00",
+                dia: "Quarta",
+                horario: "19:00",
             },
             {
                 id: 3,
-                day: "Sexta",
-                time: "10:00",
+                dia: "Sexta",
+                horario: "10:00",
             },
         ],
     },
     {
         id: 2,
-        name: "Crossfit",
-        schedules: [
+        nome: "Crossfit",
+        horarios: [
             {
                 id: 1,
-                day: "Terça",
-                time: "06:30",
+                dia: "Terça",
+                horario: "06:30",
             },
             {
                 id: 2,
-                day: "Quinta",
-                time: "08:30",
+                dia: "Quinta",
+                horario: "08:30",
             },
             {
                 id: 3,
-                day: "Sexta",
-                time: "18:00",
+                dia: "Sexta",
+                horario: "18:00",
             },
         ],
     },
