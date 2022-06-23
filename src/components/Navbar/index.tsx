@@ -36,12 +36,12 @@ const Navbar = () => {
                 <li className="p-4">
                     <Link to={"/sobre"}>Sobre</Link>
                 </li>
-                {!user.isLogged && (
+                {!user.email && (
                     <li className="p-4">
                         <Link to={"/login"}>Login</Link>
                     </li>
                 )}
-                {user.isLogged && (
+                {user.email && (
                     <li className="p-4">
                         <button onClick={user.logout}>Logout</button>
                     </li>

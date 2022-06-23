@@ -1,6 +1,7 @@
+import { gql, useQuery } from "@apollo/client";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import { treinos } from "../../auxiliarDadosCliente/treino";
+import { useAuth } from "../../context/AuthProvider/useAuth";
 
 export interface Exercises {
     id: number;
@@ -14,7 +15,29 @@ export interface Workout {
     exercicios: Exercises[];
 }
 
-export default function Treinos(GET_TREINOS_QUERY:{GET_TREINOS_QUERY:any}) {
+const GET_TREINOS_QUERY = gql`
+    query {
+        treinos(where: {usuario: {id: "cl4qyim712tdq0dkd6zoi7hr9" }}) {
+            nome
+            id
+            exercicios {
+                nome
+                reps
+                id
+            }
+        }
+    }
+`;
+
+export default function Treinos() {
+    const user = useAuth();
+
+    const { data } = useQuery<{ treinos: Workout[] }>(GET_TREINOS_QUERY, {
+        variables: {
+            "userId": user.id
+        }
+    });
+
     return (
         <div className="w-full px-4 mb-8">
             <div className="mx-auto w-full rounded-2xl bg-white p-2">
@@ -38,7 +61,7 @@ export default function Treinos(GET_TREINOS_QUERY:{GET_TREINOS_QUERY:any}) {
                                 />
                             </Disclosure.Button>
 
-                            {treinos.map((treino) => {
+                            {data?.treinos.map((treino) => {
                                 return (
                                     <Disclosure.Panel
                                         key={treino.id}

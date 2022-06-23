@@ -6,6 +6,8 @@ import { useAuth } from "../../context/AuthProvider/useAuth";
 export const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -13,26 +15,13 @@ export const Login = () => {
         setModalOpen((prevState) => !prevState);
     };
 
-    const handleFormSubmit = (e: any) => {
+    const handleFormSubmit = async (e: any) => {
         e.preventDefault();
 
-        let email = e.target.elements.email?.value;
-        let password = e.target.elements.password?.value;
-
-        onFinish({ email: email, senha: password }).then(() => {
-            if (auth.isLogged) {
-                navigate("/");
-            } else {
-                toggleModal();
-            }
-        });
-    };
-
-    async function onFinish(values: { email: string; senha: string }) {
         try {
-            await auth.authenticate(values.email, values.senha);
+            await auth.authenticate(email, password);
         } catch (error) {}
-    }
+    };
 
     return (
         <div className="h-5/6 my-9 flex bg-gray-bg1">
@@ -49,15 +38,18 @@ export const Login = () => {
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
                             id="email"
                             placeholder="Seu email"
+                            onChange={(event) => setEmail(event.target.value)}
+                            value={email}
                         />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
                         <input
-                            type="password"
+                            type="text"
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
-                            id="password"
                             placeholder="Sua senha"
+                            onChange={(event) => setPassword(event.target.value)}
+                            value={password}
                         />
                     </div>
 

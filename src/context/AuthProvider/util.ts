@@ -1,29 +1,39 @@
-import axios from "axios";
-import { Api } from "../../services/api";
+import { gql, useQuery } from "@apollo/client";
 import { IUser } from "./types";
 
-export function setUserLocalStorage(user: IUser | null) {
-    localStorage.setItem("u", JSON.stringify(user));
-}
-
-export function getUserLocalStorage() {
-    const json = localStorage.getItem("u");
-
-    if (!json) {
-        return null;
+const GET_USER_QUERY = gql`
+    query ($userEmail: String, $userPassword: String) {
+        usuarios(where: {email: $userEmail, senha: $userPassword}) {
+            email
+            nome
+            vinculo
+        }
     }
+`;
 
-    const user = JSON.parse(json);
+// export function setUserLocalStorage(user: IUser | null) {
+//     localStorage.setItem("u", JSON.stringify(user));
+// }
 
-    return user ?? null;
-}
+// export function getUserLocalStorage() {
+//     const json = localStorage.getItem("u");
+
+//     if (!json) {
+//         return null;
+//     }
+
+//     const user = JSON.parse(json);
+
+//     return user ?? null;
+// }
 
 export async function LoginRequest(email: string, senha: string) {
-    try {
-        const request = await Api.post("/login", { email, senha });
+    const { data } = useQuery(GET_USER_QUERY, {
+        variables: {
+            "userEmail": email,
+            "userPassword": senha
+        }
+    });
 
-        return request.data;
-    } catch (error) {
-        return null;
-    }
+    return data;
 }

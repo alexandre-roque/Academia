@@ -53,17 +53,17 @@ export const treinos: Workout[] = [
             },
             {
                 id: 2,
-                nome: "Supino inclinado halteres",
+                nome: "Supino inclinado",
                 reps: "4 X 8-10 reps",
             },
             {
                 id: 3,
-                nome: "Peck deck fly ",
+                nome: "Peck deck fly",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 4,
-                nome: "Desenvolvimento  ",
+                nome: "Desenvolvimento",
                 reps: "4 X 8-10 reps",
             },
             {
@@ -78,7 +78,7 @@ export const treinos: Workout[] = [
             },
             {
                 id: 7,
-                nome: "Tríceps corda ",
+                nome: "Tríceps corda",
                 reps: "3 X 8-10 reps",
             },
         ],
@@ -99,12 +99,12 @@ export const treinos: Workout[] = [
             },
             {
                 id: 3,
-                nome: "Puxada alta ",
+                nome: "Puxada alta",
                 reps: "3 X 8-10 reps",
             },
             {
                 id: 4,
-                nome: "Rosca alternada ",
+                nome: "Rosca alternada",
                 reps: "4 X 8-10 reps",
             },
             {
@@ -119,7 +119,7 @@ export const treinos: Workout[] = [
             },
             {
                 id: 7,
-                nome: "Abdominal oblíquo ",
+                nome: "Abdominal oblíquo",
                 reps: "3 X 8-10 reps",
             },
         ],

@@ -6,10 +6,6 @@ export interface IUser {
     email?: string;
     nome?: string;
     vinculo?: string;
-    turmas?: WorkoutClass[];
-    treinos?: Workout[];
-    avaliacoes?: Avaliacao[];
-    isLogged?: boolean;
     id?: string;
 }
 export interface IContext extends IUser {

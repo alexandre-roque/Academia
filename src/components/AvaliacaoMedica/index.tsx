@@ -10,8 +10,23 @@ export interface Avaliacao {
     id: string;
 }
 
-export default function AvaliacaoMedica({GET_AVALIACOES_QUERY}: {GET_AVALIACOES_QUERY: any}) {
-    const { data } = useQuery<{avaliacoes: Avaliacao[]}>(GET_AVALIACOES_QUERY);
+const GET_AVALIACOES_QUERY = gql`
+    query ($userId: ID) {
+        avaliacoes(where: {usuario: {id: $userId }}) {
+            imc
+            data
+            id
+        }
+    }
+`;
+
+export default function AvaliacaoMedica() {
+    const user = useAuth();
+
+    const { data } = useQuery<{avaliacoes: Avaliacao[]}>(GET_AVALIACOES_QUERY,
+    {variables: {
+        "userId": user.id
+    }});
 
     return (
         <div className="w-full px-4 mb-8">
