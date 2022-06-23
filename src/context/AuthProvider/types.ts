@@ -10,7 +10,7 @@ export interface IUser {
     treinos?: Workout[];
     avaliacoes?: Avaliacao[];
     isLogged?: boolean;
-    id?: number;
+    id?: string;
 }
 export interface IContext extends IUser {
     authenticate: (email: string, senha: string) => Promise<void>;

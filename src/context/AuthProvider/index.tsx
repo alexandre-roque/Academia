@@ -9,14 +9,14 @@ export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
     const [user, setUser] = useState<IUser | null>({
-        email: "alexandreroque1@hotmail.com",
-        nome: "Alexandre Roque",
+        email: "alexandre@teste.com",
+        nome: "Alexandre Teste",
         vinculo: "Admin",
         turmas: turmas,
         treinos: treinos,
         avaliacoes: avaliacoes,
         isLogged: true,
-        id: 131313,
+        id: 'cl4qyim712tdq0dkd6zoi7hr9',
     });
 
     useEffect(() => {

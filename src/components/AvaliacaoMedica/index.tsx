@@ -1,24 +1,27 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import { avaliacoes } from "../../auxiliarDadosCliente/avaliacoes";
+// import { avaliacoes } from "../../auxiliarDadosCliente/avaliacoes";
 import { gql, useQuery } from "@apollo/client";
+import { useAuth } from "../../context/AuthProvider/useAuth";
 
 export interface Avaliacao {
     data: string;
     IMC: number;
 }
 
-const GET_AVALIACOES_QUERY = gql`
-    query {
-        avaliacoes {
-            
-        }
-    }
-`;
-
 export default function AvaliacaoMedica() {
-    // const { data } = useQuery<{avaliacoes: Avaliacao[]}>(GET_AVALIACOES_QUERY);
+    const user = useAuth();
 
+    const GET_AVALIACOES_QUERY = gql`
+    query {
+        avaliacoes(where: {usuario: {id: ${user.id} }}) {
+            imc
+            data
+        }
+    }  
+    `;
+
+    const { data } = useQuery<{avaliacoes: Avaliacao[]}>(GET_AVALIACOES_QUERY);
     return (
         <div className="w-full px-4 mb-8">
             <div className="mx-auto w-full rounded-2xl bg-white p-2">
@@ -41,7 +44,7 @@ export default function AvaliacaoMedica() {
                                     } h-5 w-5 text-gray-900 place-self-center`}
                                 />
                             </Disclosure.Button>
-                            {avaliacoes.map((avaliacao) => {
+                            {data?.avaliacoes.map((avaliacao) => {
                                 return (
                                     <Disclosure.Panel className="rounded-lg my-2 px-4 pt-4 pb-2 text-gray-800 bg-slate-200">
                                         <span className="font-bold text-2xl">
