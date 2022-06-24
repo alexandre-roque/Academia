@@ -26,7 +26,7 @@ export const Cards = () => {
                         key={plano.name}
                         className="w-full py-[4rem] px-4 bg-white"
                     >
-                        <div className="py-5 text-center text-4xl font-black uppercase">
+                        <div className="py-5 text-center text-4xl font-black uppercase underline decoration-lgreen">
                             {plano.name}
                         </div>
                         <div className="max-w-[1240px] mx-auto grid md:grid-cols-3 gap-8">

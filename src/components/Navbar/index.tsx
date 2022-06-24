@@ -28,45 +28,51 @@ const Navbar = () => {
     const admin = user.vinculo === "Admin";
 
     return (
-        <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white">
+        <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white uppercase">
             <h1 className="w-full text-3xl font-bold text-lgreen">
                 <Link to={"/"}>BE FIT.</Link>
             </h1>
             <ul className="hidden md:flex">
                 <li className="p-4">
-                    <Link to={"/sobre"}>Sobre</Link>
+                    <Link  className="p-1 hover:text-lgreen" to={"/sobre"}>Sobre</Link>
                 </li>
+                {(user.vinculo === "Cliente" || admin)
+                    && (
+                    <li className="p-4">
+                        <Link  className="p-1 hover:text-lgreen" to={"/profile"}>Profile</Link>
+                    </li>
+                )}
                 {!user.email && (
                     <li className="p-4">
-                        <Link to={"/login"}>Login</Link>
+                        <Link  className="p-1 hover:text-lgreen" to={"/login"}>Login</Link>
                     </li>
                 )}
                 {user.email && (
                     <li className="p-4">
-                        <button onClick={user.logout}>Logout</button>
+                        <button className="hover:text-lgreen" onClick={user.logout}>LOGOUT</button>
+                    </li>
+                )}
+                {(user.vinculo === "Secretário(a)" || admin )
+                    && (
+                    <li className="p-4">
+                        <Link  className="p-1 hover:text-lgreen" to={"/cadastro"}>Cadastro</Link>
+                    </li>
+                )}
+                {(user.vinculo === "Médico(a)" || admin )
+                    && (
+                    <li className="p-4">
+                        <Link  className="p-1 hover:text-lgreen" to={"/avaliacao"}>Avaliação</Link>
+                    </li>
+                )}
+                {(user.vinculo === "Professor(a)" || admin)
+                    && (
+                    <li className="p-4 text-center">
+                        <Link  className="p-1 hover:text-lgreen" to={"/registro-treino"}>Registro Treino</Link>
                     </li>
                 )}
                 <li className="p-4">
-                    <Link to={"/contatos"}>Contatos</Link>
+                    <Link  className="p-1 hover:text-lgreen" to={"/contatos"}>Contatos</Link>
                 </li>
-                {user.vinculo === "Cliente" ||
-                    (admin && (
-                        <li className="p-4">
-                            <Link to={"/profile"}>Profile</Link>
-                        </li>
-                    ))}
-                {user.vinculo === "Secretário(a)" ||
-                    (admin && (
-                        <li className="p-4">
-                            <Link to={"/cadastro"}>Cadastro</Link>
-                        </li>
-                    ))}
-                {user.vinculo === "Professor(a)" ||
-                    (admin && (
-                        <li className="p-4 text-center">
-                            <Link to={"/registro-treino"}>Registro Treino</Link>
-                        </li>
-                    ))}
             </ul>
             <div onClick={handleNav} className="block md:hidden">
                 {nav ? (
@@ -87,24 +93,24 @@ const Navbar = () => {
                     BE FIT.
                 </h1>
                 <li className="p-4">
-                    <Link to={"/login"}>Login</Link>
+                    <Link  className="p-1 hover:text-lgreen" to={"/login"}>Login</Link>
                 </li>
                 <li className="p-4">
-                    <Link to={"/sobre"}>Sobre</Link>
+                    <Link  className="p-1 hover:text-lgreen" to={"/sobre"}>Sobre</Link>
                 </li>
                 <li className="p-4">
-                    <Link to={"/contatos"}>Contatos</Link>
+                    <Link  className="p-1 hover:text-lgreen" to={"/contatos"}>Contatos</Link>
                 </li>
                 <li className="p-4">
-                    <Link to={"/profile"}>Profile</Link>
-                </li>
-
-                <li className="p-4">
-                    <Link to={"/cadastro"}>Cadastro</Link>
+                    <Link  className="p-1 hover:text-lgreen" to={"/profile"}>Profile</Link>
                 </li>
 
                 <li className="p-4">
-                    <Link to={"/registro-treino"}>Registro Treino</Link>
+                    <Link  className="p-1 hover:text-lgreen" to={"/cadastro"}>Cadastro</Link>
+                </li>
+
+                <li className="p-4">
+                    <Link  className="p-1 hover:text-lgreen" to={"/registro-treino"}>Registro Treino</Link>
                 </li>
             </ul>
         </div>

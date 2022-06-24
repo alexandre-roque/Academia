@@ -5,8 +5,9 @@ import MyModal from "../../components/MyDialog";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 
 const GET_USER_QUERY = gql`
-    query ($userEmail: String, $userPassword: String) {
-        usuario(where: { email: $userEmail, senha: $userPassword }) {
+    query ($userEmail: String) {
+        usuario(where: { email: $userEmail}) {
+            id
             email
             nome
             vinculo
@@ -28,20 +29,17 @@ export const Login = () => {
     ] = useLazyQuery(GET_USER_QUERY, {
         variables: {
             userEmail: email,
-            userPassword: password,
         },
     });
 
     useEffect(() => {
-        if (called) {
-            if (userSearchedData && userSearchedData.usuario) {
-                auth.authenticate(userSearchedData.usuario);
-                navigate("/");
-            } else {
-                toggleModal();
-            }
+        if (userSearchedData && userSearchedData.usuario) {
+            auth.authenticate(userSearchedData.usuario);
+            navigate("/");
+
+            return;
         }
-    }, [called]);
+    }, [called, userSearchedData]);
 
     const toggleModal = () => {
         setModalOpen((prevState) => !prevState);
@@ -73,7 +71,7 @@ export const Login = () => {
                     <div>
                         <label htmlFor="password">Password</label>
                         <input
-                            type="text"
+                            type="password"
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
                             placeholder="Sua senha"
                             onChange={(event) =>
@@ -91,7 +89,8 @@ export const Login = () => {
                     />
 
                     <div className="flex justify-center items-center flex-col mt-6">
-                        <button
+                        <button 
+                            type="button"
                             onClick={() => loginFunction()}
                             className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
                         >

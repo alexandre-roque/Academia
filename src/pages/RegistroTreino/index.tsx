@@ -17,7 +17,7 @@ export const RegistroTreino = () => {
         console.log("Entrou");
         exercises.push({
             id: Date.now(),
-            name: exercise,
+            nome: exercise,
             reps: reps,
         });
 
@@ -30,8 +30,8 @@ export const RegistroTreino = () => {
         setWorkouts([
             ...workouts,
             {
-                name: workoutName,
-                exercises: exercises,
+                nome: workoutName,
+                exercicios: exercises,
                 id: Date.now(),
             },
         ]);
@@ -120,7 +120,7 @@ export const RegistroTreino = () => {
                             {exercises.map((ex) => {
                                 return (
                                     <div key={ex.id}>
-                                        {ex.name} - {ex.reps}
+                                        {ex.nome} - {ex.reps}
                                     </div>
                                 );
                             })}
@@ -172,18 +172,18 @@ function Treinos({ treinos }: { treinos: Workout[] }) {
                                         className="rounded-lg my-2 px-4 pt-4 pb-2 text-gray-800 bg-slate-200"
                                     >
                                         <span className="font-bold text-2xl">
-                                            Treino {treino.name}
+                                            Treino {treino.nome}
                                             <br />
                                         </span>
 
-                                        {treino.exercises.map((exercise) => {
+                                        {treino.exercicios.map((exercise) => {
                                             return (
                                                 <div
                                                     className="grid grid-cols-3 mt-1"
                                                     key={exercise.id}
                                                 >
                                                     <div className="col-span-2 font-medium text-lg">
-                                                        {exercise.name}
+                                                        {exercise.nome}
                                                     </div>
                                                     <div className="col-span-1 font-normal text-md">
                                                         {exercise.reps}

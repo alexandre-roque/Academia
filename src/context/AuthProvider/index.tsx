@@ -6,12 +6,7 @@ import { LoginRequest } from "./util";
 export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
-    const [user, setUser] = useState<IUser | null>({
-        email: "alexandre@teste.com",
-        nome: "Alexandre Teste",
-        vinculo: "Admin",
-        id: "cl4qyim712tdq0dkd6zoi7hr9",
-    });
+    const [user, setUser] = useState<IUser | null>();
 
     // useEffect(() => {
     //     const user = getUserLocalStorage();
