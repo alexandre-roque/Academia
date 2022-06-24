@@ -22,20 +22,26 @@ export const Login = () => {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const [loginFunction, { data: userSearchedData, error: userError }] =
-        useLazyQuery(GET_USER_QUERY, {
-            variables: {
-                userEmail: email,
-                userPassword: password,
-            },
-        });
+    const [
+        loginFunction,
+        { called: called, data: userSearchedData, error: userError },
+    ] = useLazyQuery(GET_USER_QUERY, {
+        variables: {
+            userEmail: email,
+            userPassword: password,
+        },
+    });
 
     useEffect(() => {
-        if (userSearchedData && userSearchedData.usuario) {
-            auth.authenticate(userSearchedData.usuario);
-            navigate("/");
+        if (called) {
+            if (userSearchedData && userSearchedData.usuario) {
+                auth.authenticate(userSearchedData.usuario);
+                navigate("/");
+            } else {
+                toggleModal();
+            }
         }
-    }, [userSearchedData, userError]);
+    }, [called]);
 
     const toggleModal = () => {
         setModalOpen((prevState) => !prevState);
@@ -90,15 +96,6 @@ export const Login = () => {
                             className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
                         >
                             Login
-                        </button>
-
-                        <div className="rounded-lg mx-auto w-5/6 bg-black h-1 my-5"></div>
-
-                        <button
-                            className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
-                            onClick={() => navigate("/register")}
-                        >
-                            Sign Up
                         </button>
                     </div>
                 </form>
