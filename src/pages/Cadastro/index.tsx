@@ -135,7 +135,7 @@ export const Cadastro = () => {
                     </div>
 
                     <div className="relative w-full flex flex-col">
-                        <label>Card number</label>
+                        <label>Número do cartão</label>
                         <input
                             className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack"
                             type="text"
@@ -163,7 +163,7 @@ export const Cadastro = () => {
 
                     <div className="grid grid-cols-2 gap-3">
                         <div className="relative flex-1 flex flex-col">
-                            <label>Expire date</label>
+                            <label>Data de expiração</label>
                             <input
                                 className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack"
                                 type="text"

@@ -10,6 +10,7 @@ import { Avaliacao } from "../pages/Avaliacao";
 import { RegistroTreino } from "../pages/RegistroTreino";
 import { Sobre } from "../pages/Sobre";
 import { Contatos } from "../pages/Contatos";
+import { Footer } from "../components/Footer";
 
 export const AppRoutes = () => {
     return (
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
                 <Route path="/registro-treino" element={<RegistroTreino />} />
                 <Route path="*" element={<Error />} />
             </Routes>
+            <Footer />
         </Router>
     );
 };
