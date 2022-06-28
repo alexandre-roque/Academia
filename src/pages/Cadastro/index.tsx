@@ -41,8 +41,7 @@ const CREATE_USER_MUTATION = gql`
         $numCartao: String!
         $dataExpiracao: String!
         $cvc: String!
-        $nomeTurma: String!
-        $horarios: [HorarioCreateInput!]
+        $turmas: [TurmaCreateInput!]
     ) {
         createUsuario(
             data: {
@@ -58,9 +57,11 @@ const CREATE_USER_MUTATION = gql`
                         cvc: $cvc
                     }
                 }
-                turmas: { create: { nome: $nomeTurma, horarios: $horarios } }
+                turmas: { create: $turmas }
             }
-        )
+        ) {
+            id
+        }
     }
 `;
 
