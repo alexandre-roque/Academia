@@ -1,5 +1,20 @@
+import { gql } from "@apollo/client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+const CREATE_AVALIACAO = gql`
+    mutation CreateAvaliacao($data: Date!, $email: String!, $imc: Float!) {
+        createAvaliacao(
+            data: {
+                data: $data
+                imc: $imc
+                usuario: { connect: { email: $email } }
+            }
+        ) {
+            id
+        }
+    }
+`;
 
 export const Avaliacao = () => {
     const navigate = useNavigate();

@@ -14,21 +14,21 @@ export const RegistroTreino = () => {
     const [exercises, setExercises] = useState<Exercises[]>([]);
 
     const addExercise = () => {
-        console.log("Entrou");
-        exercises.push({
-            id: Date.now(),
-            nome: exercise,
-            reps: reps,
-        });
-
-        setExercises(exercises);
+        setExercises((prevState) => [
+            ...prevState,
+            {
+                id: Date.now(),
+                nome: exercise,
+                reps: reps,
+            },
+        ]);
         setExercise("");
         setReps("");
     };
 
     const addWorkout = () => {
-        setWorkouts([
-            ...workouts,
+        setWorkouts((prevState) => [
+            ...prevState,
             {
                 nome: workoutName,
                 exercicios: exercises,

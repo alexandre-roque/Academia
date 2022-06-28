@@ -1,7 +1,9 @@
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { gql } from "@apollo/client";
+import { Disclosure, Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronUpIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { WorkoutClass } from "../../components/Turmas";
 
 const dias = [
     { name: "Segunda" },
@@ -28,50 +30,121 @@ const modalidades = [
         name: "Ritmos",
         horarios: ["17:00", "18:00", "19:00"],
     },
-    {
-        name: "Musculação",
-        horarios: [],
-    },
 ];
+
+const CREATE_USER_MUTATION = gql`
+    mutation CreateUser(
+        $nome: String!
+        $email: String!
+        $senha: String!
+        $cpf: String!
+        $numCartao: String!
+        $dataExpiracao: String!
+        $cvc: String!
+        $nomeTurma: String!
+        $horarios: [HorarioCreateInput!]
+    ) {
+        createUsuario(
+            data: {
+                nome: $nome
+                email: $email
+                senha: $senha
+                cpf: $cpf
+                vinculo: "Cliente"
+                cartaoDeCredito: {
+                    create: {
+                        numeroCartao: $numCartao
+                        dataExpiracao: $dataExpiracao
+                        cvc: $cvc
+                    }
+                }
+                turmas: { create: { nome: $nomeTurma, horarios: $horarios } }
+            }
+        )
+    }
+`;
 
 export const Cadastro = () => {
     const navigate = useNavigate();
+
+    const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [cpf, setCpf] = useState("");
     const [card_number, setCardNumber] = useState("");
     const [expire_date, setExpireDate] = useState("");
     const [card_cvc, setCardCvc] = useState("");
+    const [currentTurmas, setTurmas] = useState<WorkoutClass[]>([]);
 
     const [selectedModalidade, setSelectedModalidade] = useState(
         modalidades[0]
     );
+
     const [currentHorario, setCurrentHorario] = useState(
         selectedModalidade.horarios
     );
-    const [selectedHorario, setSelectedHorario] = useState([
-        currentHorario![0],
-    ]);
 
-    const [selectedDias, setselectedDias] = useState([dias[0]]);
+    const [selectedHorario, setSelectedHorario] = useState(currentHorario![0]);
 
-    useEffect(() => {
-        if (!selectedDias.length) {
-            setselectedDias([dias[0]]);
-        }
-    }, [selectedDias]);
+    const [selectedDia, setselectedDia] = useState(dias[0]);
+
+    const addTurma = () => {
+        setTurmas((prevState) => {
+            const isTurmaInArray = prevState.some(
+                (turma) => turma.nome === selectedModalidade.name
+            );
+
+            if (isTurmaInArray) {
+                const newState = prevState.map((turma) => {
+                    if (turma.nome === selectedModalidade.name) {
+                        return {
+                            nome: selectedModalidade.name,
+                            id: Date.now(),
+                            horarios: [
+                                ...turma.horarios,
+                                {
+                                    dia: selectedDia.name,
+                                    horario: selectedHorario,
+                                    id: Date.now(),
+                                },
+                            ],
+                        };
+                    } else {
+                        return turma;
+                    }
+                });
+
+                return newState;
+            } else {
+                return [
+                    ...prevState,
+                    {
+                        nome: selectedModalidade.name,
+                        id: Date.now(),
+                        horarios: [
+                            {
+                                dia: selectedDia.name,
+                                horario: selectedHorario,
+                                id: Date.now(),
+                            },
+                        ],
+                    },
+                ];
+            }
+        });
+    };
 
     useEffect(() => {
         setCurrentHorario(selectedModalidade.horarios);
     }, [selectedModalidade]);
 
     useEffect(() => {
-        setSelectedHorario([currentHorario![0]]);
+        setSelectedHorario(currentHorario![0]);
     }, [currentHorario]);
 
     useEffect(() => {
-        if (!selectedHorario.length) {
-            setSelectedHorario([currentHorario![0]]);
+        if (selectedHorario && !selectedHorario.length) {
+            setSelectedHorario(currentHorario![0]);
         }
     }, [selectedHorario]);
 
@@ -79,15 +152,14 @@ export const Cadastro = () => {
         e.preventDefault();
 
         console.log({
+            nome: nome,
             email: email,
-            password: password,
+            senha: password,
             cpf: cpf,
-            card_number: card_number,
-            expire_date: expire_date,
-            card_cvc: card_cvc,
-            selectedModalidade: selectedModalidade,
-            selectedDias: selectedDias.map((dia) => dia.name).join(", "),
-            selectedHorario: selectedHorario.join(", "),
+            numCartao: card_number,
+            dataExpiracao: expire_date,
+            cvc: card_cvc,
+            turmas: currentTurmas,
         });
     };
 
@@ -99,40 +171,45 @@ export const Cadastro = () => {
                 </h1>
 
                 <form onSubmit={handleFormSubmit}>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
-                            id="email"
-                            placeholder="Email do cliente"
-                            onChange={(event) => setEmail(event.target.value)}
-                        />
-                    </div>
+                    <label htmlFor="name">Nome</label>
+                    <input
+                        type="name"
+                        className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
+                        id="name"
+                        placeholder="Nome do cliente"
+                        value={nome}
+                        onChange={(event) => setNome(event.target.value)}
+                    />
 
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
-                            id="password"
-                            placeholder="Senha do cliente"
-                            onChange={(event) =>
-                                setPassword(event.target.value)
-                            }
-                        />
-                    </div>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
+                        id="email"
+                        placeholder="Email do cliente"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
 
-                    <div>
-                        <label htmlFor="cpf">Cpf</label>
-                        <input
-                            type="text"
-                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
-                            id="cpf"
-                            placeholder="Cpf do cliente"
-                            onChange={(event) => setCpf(event.target.value)}
-                        />
-                    </div>
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
+                        id="password"
+                        placeholder="Senha do cliente"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
+
+                    <label htmlFor="cpf">Cpf</label>
+                    <input
+                        type="text"
+                        className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack`}
+                        id="cpf"
+                        placeholder="Cpf do cliente"
+                        value={cpf}
+                        onChange={(event) => setCpf(event.target.value)}
+                    />
 
                     <div className="relative w-full flex flex-col">
                         <label>Número do cartão</label>
@@ -141,6 +218,7 @@ export const Cadastro = () => {
                             type="text"
                             id="card_number"
                             placeholder="0000 0000 0000"
+                            value={card_number}
                             onChange={(event) =>
                                 setCardNumber(event.target.value)
                             }
@@ -169,6 +247,7 @@ export const Cadastro = () => {
                                 type="text"
                                 id="expire_date"
                                 placeholder="MM/YY"
+                                value={expire_date}
                                 onChange={(event) =>
                                     setExpireDate(event.target.value)
                                 }
@@ -218,6 +297,7 @@ export const Cadastro = () => {
                                 className="rounded-md peer pl-12 w-full p-2 border outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack"
                                 type="text"
                                 id="card_cvc"
+                                value={card_cvc}
                                 placeholder="&bull;&bull;&bull;"
                                 onChange={(event) =>
                                     setCardCvc(event.target.value)
@@ -239,6 +319,8 @@ export const Cadastro = () => {
                             </svg>
                         </div>
                     </div>
+
+                    <div className="text-center font-bold text-2xl">Turma</div>
 
                     <div className="mb-4">
                         <label>Modalidade</label>
@@ -313,18 +395,15 @@ export const Cadastro = () => {
                     {selectedModalidade.name !== "Musculação" && (
                         <div className="grid grid-cols-2 gap-3 mb-2">
                             <div>
-                                <label>Dias</label>
+                                <label>Dia</label>
                                 <Listbox
-                                    value={selectedDias}
-                                    onChange={setselectedDias}
-                                    multiple
+                                    value={selectedDia}
+                                    onChange={setselectedDia}
                                 >
                                     <div className="relative mt-1">
                                         <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack sm:text-sm">
                                             <span className="block truncate">
-                                                {selectedDias
-                                                    .map((dias) => dias.name)
-                                                    .join(", ")}
+                                                {selectedDia.name}
                                             </span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <SelectorIcon
@@ -384,18 +463,15 @@ export const Cadastro = () => {
                             </div>
 
                             <div>
-                                <label>Horarios</label>
+                                <label>Horario</label>
                                 <Listbox
                                     value={selectedHorario}
                                     onChange={setSelectedHorario}
-                                    multiple
                                 >
                                     <div className="relative mt-1">
                                         <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack  sm:text-sm">
                                             <span className="block truncate">
-                                                {selectedHorario
-                                                    .map((dias) => dias)
-                                                    .join(", ")}
+                                                {selectedHorario}
                                             </span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <SelectorIcon
@@ -462,13 +538,82 @@ export const Cadastro = () => {
 
                     <div className="flex justify-center items-center flex-col mt-3">
                         <button
+                            type="button"
+                            onClick={addTurma}
+                            className={`bg-black py-2 px-4 text-sm mb-8 text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+                        >
+                            Adicionar turma
+                        </button>
+
+                        <button
                             className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
                         >
                             Cadastrar
                         </button>
                     </div>
                 </form>
+
+                <Turmas currentTurmas={currentTurmas} />
             </div>
         </div>
     );
 };
+
+function Turmas({ currentTurmas }: { currentTurmas: WorkoutClass[] }) {
+    return (
+        <div className="w-full mt-12">
+            <div className="mx-auto w-full rounded-2xl bg-white p-2">
+                <Disclosure>
+                    {({ open }) => (
+                        <>
+                            <Disclosure.Button
+                                className="flex w-full 
+                                    justify-between rounded-lg bg-gray-100 px-4 py-2 
+                                    text-center text-sm font-medium text-gray-900 hover:bg-gray-200 
+                                    focus:outline-none focus-visible:ring focus-visible:ring-gray-500 
+                                    focus-visible:ring-opacity-75"
+                            >
+                                <span className="m-auto font-extrabold text-2xl text-center uppercase">
+                                    Turmas
+                                </span>
+                                <ChevronUpIcon
+                                    className={`${
+                                        open ? "rotate-180 transform" : ""
+                                    } h-5 w-5 text-gray-900 place-self-center`}
+                                />
+                            </Disclosure.Button>
+
+                            {currentTurmas.map((turma) => {
+                                return (
+                                    <Disclosure.Panel
+                                        key={turma.id}
+                                        className="rounded-lg my-2 px-4 pt-4 pb-2 text-sm text-gray-800 bg-slate-200"
+                                    >
+                                        <span className="font-bold text-lg">
+                                            {turma.nome}
+                                            <br />
+                                        </span>
+
+                                        {turma.horarios.map((schedule) => {
+                                            return (
+                                                <div
+                                                    key={schedule.id}
+                                                    className="grid grid-cols-3 mt-1"
+                                                >
+                                                    <div className="col-span-2 font-medium text-base">
+                                                        {schedule.dia} -{" "}
+                                                        {schedule.horario}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </Disclosure.Panel>
+                                );
+                            })}
+                        </>
+                    )}
+                </Disclosure>
+            </div>
+        </div>
+    );
+}
