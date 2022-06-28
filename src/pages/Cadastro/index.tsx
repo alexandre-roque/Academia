@@ -159,7 +159,19 @@ export const Cadastro = () => {
             numCartao: card_number,
             dataExpiracao: expire_date,
             cvc: card_cvc,
-            turmas: currentTurmas,
+            turmas: currentTurmas.map((turma) => {
+                return {
+                    nome: turma.nome,
+                    horarios: {
+                        create: turma.horarios.map((horario) => {
+                            return {
+                                dia: horario.dia,
+                                horario: horario.horario,
+                            };
+                        }),
+                    },
+                };
+            }),
         });
     };
 
