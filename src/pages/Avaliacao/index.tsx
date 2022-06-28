@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -20,14 +20,20 @@ export const Avaliacao = () => {
     const navigate = useNavigate();
     const [emailCliente, setEmailCliente] = useState("");
     const [imcCliente, setImcCliente] = useState("");
+    const [createAvaliacao] = useMutation(CREATE_AVALIACAO);
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
 
-        console.log({
-            email: emailCliente,
-            imc: Number(imcCliente),
-        });
+        createAvaliacao(
+            {
+                variables: {
+                    email: emailCliente, 
+                    imc:Number(imcCliente),
+                    data: (new Date()).toISOString()
+                }
+            }
+        );
     };
 
     return (

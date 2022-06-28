@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { Disclosure, Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Fragment, useEffect, useState } from "react";
@@ -149,6 +149,8 @@ export const Cadastro = () => {
         }
     }, [selectedHorario]);
 
+    const [createUser] = useMutation(CREATE_USER_MUTATION);
+
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
 
@@ -173,6 +175,31 @@ export const Cadastro = () => {
                     },
                 };
             }),
+        });
+
+        createUser({
+            variables: {
+                nome: nome,
+                email: email,
+                senha: password,
+                cpf: cpf,
+                numCartao: card_number,
+                dataExpiracao: expire_date,
+                cvc: card_cvc,
+                turmas: currentTurmas.map((turma) => {
+                    return {
+                        nome: turma.nome,
+                        horarios: {
+                            create: turma.horarios.map((horario) => {
+                                return {
+                                    dia: horario.dia,
+                                    horario: horario.horario,
+                                };
+                            }),
+                        },
+                    };
+                }),
+            }
         });
     };
 
