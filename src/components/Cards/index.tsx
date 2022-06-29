@@ -29,7 +29,7 @@ export const Cards = () => {
                         <div className="py-5 text-center text-4xl font-black uppercase underline decoration-lgreen">
                             {plano.name}
                         </div>
-                        <div className="max-w-[1240px] mx-auto grid md:grid-cols-3 gap-8">
+                        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
                             {plano.options.map((option) => {
                                 return (
                                     <Card

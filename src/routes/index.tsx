@@ -9,7 +9,6 @@ import { CalendarPage } from "../pages/Calendar";
 import { Avaliacao } from "../pages/Avaliacao";
 import { RegistroTreino } from "../pages/RegistroTreino";
 import { Sobre } from "../pages/Sobre";
-import { Contatos } from "../pages/Contatos";
 import { Footer } from "../components/Footer";
 
 export const AppRoutes = () => {
@@ -23,7 +22,6 @@ export const AppRoutes = () => {
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/avaliacao" element={<Avaliacao />} />
-                <Route path="/contatos" element={<Contatos />} />
                 <Route path="/sobre" element={<Sobre />} />
                 <Route path="/registro-treino" element={<RegistroTreino />} />
                 <Route path="*" element={<Error />} />

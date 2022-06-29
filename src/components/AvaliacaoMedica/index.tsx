@@ -12,7 +12,7 @@ export interface Avaliacao {
 
 const GET_AVALIACOES_QUERY = gql`
     query ($userId: ID) {
-        avaliacoes(where: {usuario: {id: $userId }}) {
+        avaliacoes(where: { usuario: { id: $userId } }) {
             imc
             data
             id
@@ -23,10 +23,14 @@ const GET_AVALIACOES_QUERY = gql`
 export default function AvaliacaoMedica() {
     const user = useAuth();
 
-    const { data } = useQuery<{avaliacoes: Avaliacao[]}>(GET_AVALIACOES_QUERY,
-    {variables: {
-        "userId": user.id
-    }});
+    const { data } = useQuery<{ avaliacoes: Avaliacao[] }>(
+        GET_AVALIACOES_QUERY,
+        {
+            variables: {
+                userId: user.id,
+            },
+        }
+    );
 
     return (
         <div className="w-full px-4 mb-8">
@@ -52,7 +56,10 @@ export default function AvaliacaoMedica() {
                             </Disclosure.Button>
                             {data?.avaliacoes.map((avaliacao) => {
                                 return (
-                                    <Disclosure.Panel key={avaliacao.id} className="rounded-lg my-2 px-4 pt-4 pb-2 text-gray-800 bg-slate-200">
+                                    <Disclosure.Panel
+                                        key={avaliacao.id}
+                                        className="rounded-lg my-2 px-4 pt-4 pb-2 text-gray-800 bg-slate-200"
+                                    >
                                         <span className="font-bold text-2xl">
                                             {avaliacao.data}
                                             <br />

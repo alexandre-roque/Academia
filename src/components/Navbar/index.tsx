@@ -28,7 +28,7 @@ const Navbar = () => {
     const admin = user.vinculo === "Admin";
 
     return (
-        <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white uppercase">
+        <div className="flex justify-between items-center h-24 max-w-7xl mx-auto px-4 text-white uppercase">
             <h1 className="w-full text-3xl font-bold text-lgreen">
                 <Link className="hover:text-white" to={"/"}>
                     BE FIT.
@@ -94,11 +94,6 @@ const Navbar = () => {
                         </Link>
                     </li>
                 )}
-                <li className="p-4">
-                    <Link className="p-1 hover:text-lgreen" to={"/contatos"}>
-                        Contatos
-                    </Link>
-                </li>
             </ul>
             <div onClick={handleNav} className="block md:hidden">
                 {nav ? (
@@ -126,11 +121,6 @@ const Navbar = () => {
                 <li className="p-4">
                     <Link className="p-1 hover:text-lgreen" to={"/sobre"}>
                         Sobre
-                    </Link>
-                </li>
-                <li className="p-4">
-                    <Link className="p-1 hover:text-lgreen" to={"/contatos"}>
-                        Contatos
                     </Link>
                 </li>
                 <li className="p-4">

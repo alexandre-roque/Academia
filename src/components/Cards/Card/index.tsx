@@ -21,7 +21,7 @@ export const Card = ({ label, prices }: CardProps) => {
                 })}
             </div>
             <button
-                onClick={() => navigate("/contatos")}
+                onClick={() => navigate("/sobre")}
                 className="bg-lgreen w-[200px] rounded-md font-medium my-6 mx-auto px-6 py-3"
             >
                 Escolher plano
