@@ -1,20 +1,19 @@
 import React, { createContext, useEffect, useState } from "react";
 import { IAuthProvider, IContext, IUser } from "./types";
-import { LoginRequest } from "./util";
-// import { getUserLocalStorage, LoginRequest, setUserLocalStorage } from "./util";
+import { getUserLocalStorage, setUserLocalStorage } from "./util";
 
 export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
     const [user, setUser] = useState<IUser | null>();
 
-    // useEffect(() => {
-    //     const user = getUserLocalStorage();
+    useEffect(() => {
+        const user = getUserLocalStorage();
 
-    //     if (user) {
-    //         setUser(user);
-    //     }
-    // }, []);
+        if (user) {
+            setUser(user);
+        }
+    }, []);
 
     function authenticate(user: IUser) {
         const payload = {
@@ -25,12 +24,12 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         };
 
         setUser(payload);
-        // setUserLocalStorage(payload);
+        setUserLocalStorage(payload);
     }
 
     function logout() {
         setUser(null);
-        // setUserLocalStorage(null);
+        setUserLocalStorage(null);
     }
 
     return (

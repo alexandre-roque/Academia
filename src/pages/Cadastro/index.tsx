@@ -61,13 +61,41 @@ const CREATE_USER_MUTATION = gql`
             }
         ) {
             id
+            cartaoDeCredito {
+                id
+            }
+            turmas {
+                id
+            }
+        }
+    }
+`;
+
+const PUBLISH_CARTAO = gql`
+    mutation PublishCartaoDeCredito($id: ID!) {
+        publishCartaoDeCredito(where: { id: $id }) {
+            id
+        }
+    }
+`;
+
+const PUBLISH_USUARIO = gql`
+    mutation PublishUsuario($id: ID!) {
+        publishUsuario(where: { id: $id }) {
+            id
+        }
+    }
+`;
+
+const PUBLISH_TURMA = gql`
+    mutation PublishTurma($id: ID!) {
+        publishTurma(where: { id: $id }) {
+            id
         }
     }
 `;
 
 export const Cadastro = () => {
-    const navigate = useNavigate();
-
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -149,35 +177,15 @@ export const Cadastro = () => {
         }
     }, [selectedHorario]);
 
-    const [createUser] = useMutation(CREATE_USER_MUTATION);
+    const [createUsuario] = useMutation(CREATE_USER_MUTATION);
+    const [publishCartao] = useMutation(PUBLISH_CARTAO);
+    const [publishTurma] = useMutation(PUBLISH_TURMA);
+    const [publishUser] = useMutation(PUBLISH_USUARIO);
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
 
-        console.log({
-            nome: nome,
-            email: email,
-            senha: password,
-            cpf: cpf,
-            numCartao: card_number,
-            dataExpiracao: expire_date,
-            cvc: card_cvc,
-            turmas: currentTurmas.map((turma) => {
-                return {
-                    nome: turma.nome,
-                    horarios: {
-                        create: turma.horarios.map((horario) => {
-                            return {
-                                dia: horario.dia,
-                                horario: horario.horario,
-                            };
-                        }),
-                    },
-                };
-            }),
-        });
-
-        createUser({
+        createUsuario({
             variables: {
                 nome: nome,
                 email: email,
@@ -199,7 +207,28 @@ export const Cadastro = () => {
                         },
                     };
                 }),
-            }
+            },
+            onCompleted(data) {
+                publishCartao({
+                    variables: {
+                        id: data.createUsuario.cartaoDeCredito.id,
+                    },
+                });
+
+                publishUser({
+                    variables: {
+                        id: data.createUsuario.id,
+                    },
+                });
+
+                data.createUsuario.turmas.forEach((turma: { id: any }) => {
+                    publishTurma({
+                        variables: {
+                            id: turma.id,
+                        },
+                    });
+                });
+            },
         });
     };
 

@@ -153,6 +153,12 @@ const Navbar = () => {
                         Registro Treino
                     </Link>
                 </li>
+
+                <li className="p-4">
+                    <Link className="p-1 hover:text-lgreen" to={"/avaliacao"}>
+                        Avaliação
+                    </Link>
+                </li>
             </ul>
         </div>
     );

@@ -2,7 +2,6 @@ import { gql, useQuery } from "@apollo/client";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import { useAuth } from "../../context/AuthProvider/useAuth";
-
 export interface Exercises {
     id: number;
     nome: String;
@@ -16,8 +15,8 @@ export interface Workout {
 }
 
 const GET_TREINOS_QUERY = gql`
-    query {
-        treinos(where: {usuario: {id: "cl4qyim712tdq0dkd6zoi7hr9" }}) {
+    query ($userId: ID) {
+        treinos(where: { usuario: { id: $userId } }) {
             nome
             id
             exercicios {
@@ -34,8 +33,8 @@ export default function Treinos() {
 
     const { data } = useQuery<{ treinos: Workout[] }>(GET_TREINOS_QUERY, {
         variables: {
-            "userId": user.id
-        }
+            userId: user.id,
+        },
     });
 
     return (

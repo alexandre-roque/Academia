@@ -11,21 +11,21 @@ const GET_USER_QUERY = gql`
     }
 `;
 
-// export function setUserLocalStorage(user: IUser | null) {
-//     localStorage.setItem("u", JSON.stringify(user));
-// }
+export function setUserLocalStorage(user: IUser | null) {
+    localStorage.setItem("u", JSON.stringify(user));
+}
 
-// export function getUserLocalStorage() {
-//     const json = localStorage.getItem("u");
+export function getUserLocalStorage() {
+    const json = localStorage.getItem("u");
 
-//     if (!json) {
-//         return null;
-//     }
+    if (!json) {
+        return null;
+    }
 
-//     const user = JSON.parse(json);
+    const user = JSON.parse(json);
 
-//     return user ?? null;
-// }
+    return user ?? null;
+}
 
 export async function LoginRequest(email: string, senha: string) {
     const [loginFunction, { data: userSearchedData, error: userError }] =

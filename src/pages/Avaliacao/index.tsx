@@ -16,24 +16,37 @@ const CREATE_AVALIACAO = gql`
     }
 `;
 
+const PUBLISH_AVALIACAO = gql`
+    mutation PublishAvaliacao($id: ID!) {
+        publishAvaliacao(where: { id: $id }) {
+            id
+        }
+    }
+`;
+
 export const Avaliacao = () => {
-    const navigate = useNavigate();
     const [emailCliente, setEmailCliente] = useState("");
     const [imcCliente, setImcCliente] = useState("");
     const [createAvaliacao] = useMutation(CREATE_AVALIACAO);
+    const [publishAvaliacao] = useMutation(PUBLISH_AVALIACAO);
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
 
-        createAvaliacao(
-            {
-                variables: {
-                    email: emailCliente, 
-                    imc:Number(imcCliente),
-                    data: (new Date()).toISOString()
-                }
-            }
-        );
+        createAvaliacao({
+            variables: {
+                email: emailCliente,
+                imc: Number(imcCliente),
+                data: new Date().toISOString(),
+            },
+            onCompleted(data) {
+                publishAvaliacao({
+                    variables: {
+                        id: data.createAvaliacao.id,
+                    },
+                });
+            },
+        });
     };
 
     return (

@@ -1,17 +1,46 @@
+import { gql, useMutation } from "@apollo/client";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Exercises, Workout } from "../../components/Treinos";
 
-export const RegistroTreino = () => {
-    const navigate = useNavigate();
+const CREATE_TREINO = gql`
+    mutation CreateTreino(
+        $nome: String!
+        $exercicios: [ExercicioCreateInput!]
+        $email: String!
+    ) {
+        createTreino(
+            data: {
+                nome: $nome
+                exercicios: { create: $exercicios }
+                usuario: { connect: { email: $email } }
+            }
+        ) {
+            id
+        }
+    }
+`;
 
+const PUBLISH_TREINO = gql`
+    mutation PublishTreino($id: ID!) {
+        publishTreino(where: { id: $id }) {
+            id
+        }
+    }
+`;
+
+export const RegistroTreino = () => {
     const [workouts, setWorkouts] = useState<Workout[]>([]);
     const [workoutName, setWorkoutName] = useState("");
     const [exercise, setExercise] = useState("");
     const [reps, setReps] = useState("");
     const [exercises, setExercises] = useState<Exercises[]>([]);
+    const [email, setEmail] = useState("");
+
+    const [createTreino, { data }] = useMutation(CREATE_TREINO);
+    const [publishTreino] = useMutation(PUBLISH_TREINO);
 
     const addExercise = () => {
         setExercises((prevState) => [
@@ -42,6 +71,30 @@ export const RegistroTreino = () => {
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
+
+        if (workouts && workouts.length) {
+            for (const workout of workouts) {
+                createTreino({
+                    variables: {
+                        nome: workout.nome,
+                        exercicios: workout.exercicios.map((exercicio) => {
+                            return {
+                                nome: exercicio.nome,
+                                reps: exercicio.reps,
+                            };
+                        }),
+                        email: email,
+                    },
+                    onCompleted(data) {
+                        publishTreino({
+                            variables: {
+                                id: data.createTreino.id,
+                            },
+                        });
+                    },
+                });
+            }
+        }
     };
 
     return (
@@ -58,6 +111,8 @@ export const RegistroTreino = () => {
                         className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
                         id="email"
                         placeholder="Email do cliente"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
                     />
 
                     <label>Treino</label>

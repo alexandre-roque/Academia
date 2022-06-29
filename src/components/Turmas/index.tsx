@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import { turmas } from "../../auxiliarDadosCliente/turmas";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 
 export interface Schedule {
@@ -18,7 +17,7 @@ export interface WorkoutClass {
 
 const GET_TURMAS_QUERY = gql`
     query ($userId: ID) {
-        turmas(where: {usuario: {id: $userId }}) {
+        turmas(where: { usuario: { id: $userId } }) {
             nome
             id
             horarios {
@@ -33,10 +32,10 @@ const GET_TURMAS_QUERY = gql`
 export default function Turmas() {
     const user = useAuth();
 
-    const { data } = useQuery<{turmas: WorkoutClass[]}>(GET_TURMAS_QUERY,{
+    const { data } = useQuery<{ turmas: WorkoutClass[] }>(GET_TURMAS_QUERY, {
         variables: {
-            "userId": user.id
-        }
+            userId: user.id,
+        },
     });
 
     return (

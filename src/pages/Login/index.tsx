@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthProvider/useAuth";
 
 const GET_USER_QUERY = gql`
     query ($userEmail: String) {
-        usuario(where: { email: $userEmail}) {
+        usuario(where: { email: $userEmail }) {
             id
             email
             nome
@@ -23,23 +23,15 @@ export const Login = () => {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const [
-        loginFunction,
-        { called: called, data: userSearchedData, error: userError },
-    ] = useLazyQuery(GET_USER_QUERY, {
+    const [loginFunction] = useLazyQuery(GET_USER_QUERY, {
         variables: {
             userEmail: email,
         },
-    });
-
-    useEffect(() => {
-        if (userSearchedData && userSearchedData.usuario) {
-            auth.authenticate(userSearchedData.usuario);
+        onCompleted(data) {
+            auth.authenticate(data.usuario);
             navigate("/");
-
-            return;
-        }
-    }, [called, userSearchedData]);
+        },
+    });
 
     const toggleModal = () => {
         setModalOpen((prevState) => !prevState);
@@ -89,7 +81,7 @@ export const Login = () => {
                     />
 
                     <div className="flex justify-center items-center flex-col mt-6">
-                        <button 
+                        <button
                             type="button"
                             onClick={() => loginFunction()}
                             className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
