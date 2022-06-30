@@ -11,7 +11,7 @@ export const InfoComponent = () => {
                     src={Academia}
                     alt="/"
                 />
-                <div className="flex flex-col justify-center text-center">
+                <div className="flex flex-col justify-center text-center px-4">
                     <h1 className="md:text-4xl text-lgreen sm:text-3xl text-2xl font-bold py-2">
                         Faça parte do treinamento
                     </h1>
