@@ -1,28 +1,96 @@
-import { useState } from "react";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
+import MyModal from "../../components/MyDialog";
 import { useAuth } from "../../context/AuthProvider/useAuth";
+
+const GET_USER_QUERY = gql`
+    query ($userEmail: String) {
+        usuario(where: { email: $userEmail }) {
+            id
+            email
+            nome
+            vinculo
+        }
+    }
+`;
 
 export const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
-    const [emailValue, setEmailValue] = useState("");   
-    const [passwordValue, setPasswordValue] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    async function onFinish(values: {email: string, senha: string}) {
-        try {
-           await auth.authenticate(values.email, values.senha);
+    const [modalOpen, setModalOpen] = useState(false);
 
-            navigate('/');
-        } catch (error) {
-            // message.error("Email ou senha inválidos");
-        }
-    }
+    const [loginFunction] = useLazyQuery(GET_USER_QUERY, {
+        variables: {
+            userEmail: email,
+        },
+        onCompleted(data) {
+            auth.authenticate(data.usuario);
+            navigate("/");
+        },
+    });
 
-    const onEmailChange = (e: React.FormEvent<HTMLInputElement>) => setEmailValue(e.currentTarget.value);
-    const onPasswordChange = (e: React.FormEvent<HTMLInputElement>) => setPasswordValue(e.currentTarget.value);
+    const toggleModal = () => {
+        setModalOpen((prevState) => !prevState);
+    };
+
+    const handleFormSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+    };
 
     return (
-            <Navbar />
+        <div className="h-5/6 my-9 flex bg-gray-bg1">
+            <div className="w-full max-w-md m-auto bg-slate-300 rounded-lg border border-primaryBorder shadow-default py-10 px-16">
+                <h1 className="text-2xl font-medium text-black mt-4 mb-12 text-center">
+                    LOGIN
+                </h1>
+
+                <form onSubmit={handleFormSubmit}>
+                    <div>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
+                            id="email"
+                            placeholder="Seu email"
+                            onChange={(event) => setEmail(event.target.value)}
+                            value={email}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 focus-visible:ring focus-visible:ring-opacity-25 focus-visible:ring-lblack `}
+                            placeholder="Sua senha"
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
+                            value={password}
+                        />
+                    </div>
+
+                    <MyModal
+                        isOpen={modalOpen}
+                        toggle={toggleModal}
+                        title="Erro"
+                        content="Erro ao efetuar o login"
+                    />
+
+                    <div className="flex justify-center items-center flex-col mt-6">
+                        <button
+                            type="button"
+                            onClick={() => loginFunction()}
+                            className={`bg-black py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+                        >
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 };

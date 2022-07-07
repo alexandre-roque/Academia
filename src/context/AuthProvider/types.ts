@@ -1,21 +1,15 @@
+import { Avaliacao } from "../../components/AvaliacaoMedica";
+import { Workout } from "../../components/Treinos";
+import { WorkoutClass } from "../../components/Turmas";
+
 export interface IUser {
     email?: string;
-    nome?:string,
-    endereco?: {
-        cep?:string,
-        complemento?:string,
-        numero?:number,
-        bairro?:string,
-        cidade?:string,
-        estado?:string,
-        rua?: string
-    },
-    isLogged?: boolean,
-    id?: number
+    nome?: string;
+    vinculo?: string;
+    id?: string;
 }
-
 export interface IContext extends IUser {
-    authenticate: (email: string, senha: string) => Promise<void>;
+    authenticate: (user: IUser) => void;
     logout: () => void;
 }
 
