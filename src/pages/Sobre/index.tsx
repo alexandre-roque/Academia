@@ -19,7 +19,7 @@ export const Sobre = () => {
                         xs:grid xs:grid-cols-2 xs:gap-4 
                         md:col-span-3 md:text-5xl md:grid-cols-3"
                 >
-                    <span className="md:col-span-2 md:text-center">
+                    <span className="text-center md:col-span-2">
                         Sobre a nossa Academia{" "}
                         <span className="text-lgreen">BE FIT</span>
                     </span>
@@ -27,8 +27,9 @@ export const Sobre = () => {
 
                 <p
                     className="
+                    text-center
                     xs:row-start-2 xs:col-start-2 xs:self-center
-                    md:col-start-1 md:col-span-2 md:pr-12 md:text-lg md:text-center
+                    md:col-start-1 md:col-span-2 md:pr-12 md:text-lg
                     "
                 >
                     A academia <span className="text-lgreen">BE FIT</span> conta
@@ -66,7 +67,7 @@ export const Sobre = () => {
                     className="h-16 flex flex-col justify-center items-center
                         xs:aspect-square xs:h-auto p-4 
                         hover:scale-105 duration-200
-                        bg-white"
+                        bg-slate-300"
                 >
                     <img className="w-1/2" src={MapIcon}></img>
 
@@ -94,7 +95,7 @@ export const Sobre = () => {
                     className="h-16 flex flex-col justify-center items-center
                         xs:aspect-square xs:h-auto p-4 
                         hover:scale-105 duration-200
-                        bg-white"
+                        bg-slate-300"
                 >
                     <span className="text-black px-8 text-xl font-bold text-center">
                         Para fazer sua matrícula, entre em contato pelo WhatsApp
@@ -132,19 +133,20 @@ export const Sobre = () => {
                     className="h-16 flex flex-col justify-center items-center
                         xs:aspect-square xs:h-auto p-4 
                         hover:scale-105 duration-200
-                        bg-white"
+                        bg-slate-300"
                 >
                     <img className="w-1/2" src={Diamond}></img>
 
                     <span className="text-black px-8 text-xl font-bold text-center">
-                        Satisfação 5 estrelas
+                        Satisfação 5 estrelas <br/> ⭐⭐⭐⭐⭐
                     </span>
                 </div>
 
                 <p
                     className="
-                        xs:self-center
-                        md:text-lg md:col-span-2 md:px-4 md: text-center
+                    text-center
+                    xs:self-center
+                    md:text-lg md:col-span-2 md:px-4
                 "
                 >
                     A academia <span className="text-lgreen">BE FIT</span> conta

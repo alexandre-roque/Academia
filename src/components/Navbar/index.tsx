@@ -28,7 +28,7 @@ const Navbar = () => {
     const admin = user.vinculo === "Admin";
 
     return (
-        <div className="flex justify-between items-center h-24 max-w-7xl mx-auto px-4 text-white uppercase">
+        <div className="flex justify-between items-center h-24 max-w-7xl mx-8 px-4 text-white uppercase">
             <h1 className="w-full text-3xl font-bold text-lgreen">
                 <Link className="hover:text-white" to={"/"}>
                     BE FIT.
