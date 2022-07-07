@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CREATE_AVALIACAO = gql`
     mutation CreateAvaliacao($data: Date!, $email: String!, $imc: Float!) {
@@ -29,6 +29,7 @@ export const Avaliacao = () => {
     const [imcCliente, setImcCliente] = useState("");
     const [createAvaliacao] = useMutation(CREATE_AVALIACAO);
     const [publishAvaliacao] = useMutation(PUBLISH_AVALIACAO);
+    const navigate = useNavigate();
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
@@ -45,6 +46,7 @@ export const Avaliacao = () => {
                         id: data.createAvaliacao.id,
                     },
                 });
+                navigate("/");
             },
         });
     };

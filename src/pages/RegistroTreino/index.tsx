@@ -38,6 +38,7 @@ export const RegistroTreino = () => {
     const [reps, setReps] = useState("");
     const [exercises, setExercises] = useState<Exercises[]>([]);
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
     const [createTreino, { data }] = useMutation(CREATE_TREINO);
     const [publishTreino] = useMutation(PUBLISH_TREINO);
@@ -91,6 +92,7 @@ export const RegistroTreino = () => {
                                 id: data.createTreino.id,
                             },
                         });
+                        navigate("/");
                     },
                 });
             }
