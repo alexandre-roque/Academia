@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthProvider/useAuth";
 
 export interface Avaliacao {
     data: string;
-    IMC: number;
+    imc: number;
     id: string;
 }
 
@@ -66,12 +66,12 @@ export default function AvaliacaoMedica() {
                                         </span>
                                         <div className="grid grid-cols-3 mt-1">
                                             <div className="col-span-1 font-bold text-lg">
-                                                IMC: {avaliacao.IMC}
+                                                IMC: {avaliacao.imc}
                                             </div>
                                             <div className="col-span-2 font-medium text-lg">
                                                 Situação:{" "}
                                                 {CalcularSituacao(
-                                                    avaliacao.IMC
+                                                    avaliacao.imc
                                                 )}
                                             </div>
                                         </div>
