@@ -66,11 +66,7 @@ export default function AvaliacaoMedica() {
                                         </span>
                                         <div className="grid grid-cols-3 mt-1">
                                             <div className="col-span-1 font-bold text-lg">
-<<<<<<< Updated upstream
                                                 IMC: {avaliacao.imc}
-=======
-                                                imc: {avaliacao.imc}
->>>>>>> Stashed changes
                                             </div>
                                             <div className="col-span-2 font-medium text-lg">
                                                 Situação:{" "}
